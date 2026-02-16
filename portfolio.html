@@ -15,12 +15,13 @@
   </div>
 
   <nav class="section-nav" aria-label="Sections">
-    <button class="dot" data-target="hero"></button>
-    <button class="dot" data-target="about"></button>
-    <button class="dot" data-target="work"></button>
+    <button class="dot" data-target="hero" aria-label="Go to hero"></button>
+    <button class="dot" data-target="about" aria-label="Go to about"></button>
+    <button class="dot" data-target="work" aria-label="Go to work"></button>
   </nav>
 
-  <main>
+  <!-- main scroller observed by IntersectionObserver -->
+  <main id="scroller">
 
     <section class="section section--hero" id="hero">
       <div class="wrap">
@@ -58,43 +59,57 @@
           I enjoy solving real-world problems through code, continuously learning new technologies, and bridging the gap between software development and data science.
         </p>
 
-        <div class="experience">
+        <div class="experience-carousel" aria-roledescription="carousel">
+          <!-- Slides wrapper -->
+          <div class="slides" id="slides">
 
-          <h3>Experience</h3>
+            <!-- Slide 0: Latest (Application Developer) — TEXT LEFT, IMAGE RIGHT -->
+            <article class="slide left" aria-roledescription="slide" aria-label="Application Developer">
+              <div class="slide-content">
+                <div class="job-title">Application Developer</div>
+                <div class="job-company">The Sturge-Weber Foundation · Part-time</div>
+                <div class="job-meta">Sep 2025 - Present · 6 mos — Tempe, Arizona, United States · Remote</div>
 
-          <!-- RIGHT CARD -->
-          <div class="job-card right">
-            <div class="job-title">Application Developer</div>
-            <div class="job-company">The Sturge-Weber Foundation · Part-time</div>
-            <div class="job-meta">
-              Sep 2025 - Present · 6 mos<br>
-              Tempe, Arizona, United States · Remote
-            </div>
+                <ul class="job-list">
+                  <li>Implementing an iOS version of existing Android medical application</li>
+                  <li>Application for children with neurological conditions, especially epilepsy and Sturge-Weber syndrome</li>
+                  <li>Enhanced Android application with additional features and improved UI</li>
+                </ul>
+              </div>
 
-            <ul>
-              <li>Implementing an iOS version of existing Android medical application</li>
-              <li>Application for children with neurological conditions, especially epilepsy and Sturge-Weber syndrome</li>
-              <li>Enhanced Android application with additional features and improved UI</li>
-            </ul>
-          </div>
+              <figure class="slide-image">
+                <img src="C:\Users\USER\OneDrive\Documents\Jared\Other work or internships\Portfolio\swf.jpg" alt="Sturge-Weber Foundation screenshot">
+              </figure>
+            </article>
 
-          <!-- LEFT CARD -->
-          <div class="job-card left">
-            <div class="job-title">Data Warehouse Engineer Intern</div>
-            <div class="job-company">Cloud Space Co · Internship</div>
-            <div class="job-meta">
-              Jun 2025 - Aug 2025 · 3 mos<br>
-              Puchong, Selangor, Malaysia · Hybrid
-            </div>
+            <!-- Slide 1: Data Warehouse Intern — TEXT LEFT, IMAGE RIGHT -->
+            <article class="slide left" aria-roledescription="slide" aria-label="Data Warehouse Intern">
+              <div class="slide-content">
+                <div class="job-title">Data Warehouse Engineer Intern</div>
+                <div class="job-company">Cloud Space Co · Internship</div>
+                <div class="job-meta">Jun 2025 - Aug 2025 · 3 mos — Puchong, Selangor, Malaysia · Hybrid</div>
 
-            <ul>
-              <li>Google Cloud Premier Partner & 2025 Google Cloud Partner Of The Year — Malaysia</li>
-              <li>Managed data warehousing processes using GCP (BigQuery, Google Drive)</li>
-              <li>Built a basic chatbot using Vertex AI and Google AgentSpace during POC phase</li>
-            </ul>
-          </div>
+                <ul class="job-list">
+                  <li>Google Cloud Premier Partner & 2025 Google Cloud Partner Of The Year — Malaysia</li>
+                  <li>Managed data warehousing processes using GCP (BigQuery, Google Drive)</li>
+                  <li>Built a basic chatbot using Vertex AI and Google AgentSpace during POC phase</li>
+                </ul>
+              </div>
 
-        </div>
+              <figure class="slide-image">
+                <img src="C:\Users\USER\OneDrive\Documents\Jared\Other work or internships\Portfolio\cloudspace.jpg" alt="Cloud Space logo / screenshot">
+              </figure>
+            </article>
+
+          </div> <!-- .slides -->
+
+          <!-- Left and Right arrow controls -->
+          <button class="carousel-prev" id="prevBtn" aria-label="Previous experience">‹</button>
+          <button class="carousel-next" id="nextBtn" aria-label="Next experience">›</button>
+
+          <!-- small pager (dots) -->
+          <div class="carousel-pager" id="pager" aria-hidden="false"></div>
+        </div> <!-- .experience-carousel -->
 
       </div>
     </section>
@@ -111,35 +126,73 @@
   </main>
 
   <script>
-    const sections = document.querySelectorAll('.section');
-    const dots = document.querySelectorAll('.dot');
+    // IntersectionObserver uses the main scroller root so sections become visible
+    (function(){
+      const rootEl = document.getElementById('scroller');
+      const opts = { root: rootEl, rootMargin: '0px', threshold: [0.25, 0.6] };
 
-    const observer = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          dots.forEach(dot=>{
-            dot.classList.toggle(
-              'active',
-              dot.dataset.target === entry.target.id
-            );
-          });
-        } else {
-          entry.target.classList.remove('visible');
-        }
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry => {
+          const el = entry.target;
+          if(entry.intersectionRatio >= 0.25){
+            el.classList.add('visible');
+          } else {
+            el.classList.remove('visible');
+          }
+        });
+      }, opts);
+
+      document.querySelectorAll('.section').forEach(s => {
+        observer.observe(s);
+        s.setAttribute('tabindex','-1');
       });
-    }, {threshold:0.5});
+    })();
+  </script>
 
-    sections.forEach(section=>{
-      observer.observe(section);
-    });
+  <script>
+    // Carousel logic with prev and next
+    (function(){
+      const slidesEl = document.getElementById('slides');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const pager = document.getElementById('pager');
+      let index = 0;
+      const total = slides.length;
 
-    dots.forEach(dot=>{
-      dot.addEventListener('click',()=>{
-        document.getElementById(dot.dataset.target)
-          .scrollIntoView({behavior:'smooth'});
+      // Build pager dots
+      slides.forEach((s,i)=>{
+        const d = document.createElement('button');
+        d.className = 'pager-dot';
+        d.setAttribute('aria-label', 'Go to slide '+(i+1));
+        d.addEventListener('click', ()=> show(i));
+        pager.appendChild(d);
       });
-    });
+
+      function updatePager(){
+        Array.from(pager.children).forEach((b,i)=>{
+          b.classList.toggle('active', i===index);
+        });
+      }
+
+      function show(n){
+        index = (n + total) % total;
+        slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+        updatePager();
+      }
+
+      nextBtn.addEventListener('click', ()=> show(index+1));
+      prevBtn.addEventListener('click', ()=> show(index-1));
+
+      // keyboard navigation
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight') show(index+1);
+        if(e.key === 'ArrowLeft') show(index-1);
+      });
+
+      // initialize
+      show(0);
+    })();
   </script>
 
 </body>
