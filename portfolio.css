@@ -118,35 +118,8 @@ main{
   padding:0;
 }
 
-/* If your markup contains a .slide-card wrapper use that as the visual card.
-   If not, .slide will be styled too — both are supported below. */
-
-/* VISUAL CARD STYLES (applied to .slide-card when present) */
-.slide-card{
-  display:flex;
-  gap:1.25rem;
-  align-items:center;
-  justify-content:space-between;
-  background: linear-gradient(180deg, #fff7f0, #fff5ee); /* new soft cream */
-  padding:2.0rem 2.25rem;   /* generous internal padding */
-  border-radius:12px;
-  box-shadow:0 12px 34px rgba(124,45,18,0.06);
-  width:100%;
-  max-width:1100px;
-  box-sizing:border-box;
-  line-height:1.65;
-}
-
-/* VISUAL CARD STYLES (applied to .slide if .slide-card is not present) */
-.slide.cardized {
-  /* class .cardized is added here only by the CSS rule to be explicit — not required in HTML */
-}
-.slide[role="listitem"],
-.slide {
-  /* fallback: if your slide contains .slide-content directly, style the slide itself */
-}
-.slide {
-  /* apply same visual treatment to .slide in case .slide-card doesn't exist */
+/* VISUAL CARD STYLES for slides */
+.slide{
   background: linear-gradient(180deg, #fff7f0, #fff5ee);
   padding:2.0rem 2.25rem;
   border-radius:12px;
@@ -158,28 +131,21 @@ main{
   align-items:center;
 }
 
-/* Ensure the internal layout (text + image) still matches your HTML */
-.slide-content,
-.slide .slide-content,
-.slide-card .slide-content{
+.slide-content{
   flex:1 1 65%;
   min-width:0;
   padding:0 1.25rem;
   line-height:1.65;
 }
 
-.slide-image,
-.slide .slide-image,
-.slide-card .slide-image{
+.slide-image{
   flex:0 0 320px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-.slide-image img,
-.slide .slide-image img,
-.slide-card .slide-image img{
+.slide-image img{
   width:100%;
   height:240px;
   object-fit:cover;
@@ -213,23 +179,19 @@ main{
 }
 
 /* Ensure left variant still works */
-.slide.left,
-.slide-card.left{
+.slide.left{
   display:flex;
 }
-.slide.left .slide-content,
-.slide-card.left .slide-content{
+.slide.left .slide-content{
   order:0;
   text-align:left;
 }
-.slide.left .slide-image,
-.slide-card.left .slide-image{
+.slide.left .slide-image{
   order:1;
   margin-left:1rem;
 }
 
 /* ----- Arrows: outside the card, not overlapping ----- */
-/* Keep them large, clearly visible, and outside the card edge */
 .carousel-prev, .carousel-next{
   position:absolute;
   top:50%;
@@ -261,7 +223,7 @@ main{
 @media (max-width:880px){
   .carousel-prev { left:10px; }
   .carousel-next { right:10px; }
-  .slide, .slide-card { padding:1.1rem; max-width:92%; }
+  .slide { padding:1.1rem; max-width:92%; }
   .slide-image img { height:260px; }
 }
 
@@ -282,7 +244,7 @@ main{
   position:fixed;
   left:1rem;
   top:1rem;
-  z-index:40;
+  z-index:60;
 }
 
 .top-dot{
@@ -293,6 +255,8 @@ main{
   display:inline-block;
 }
 
+/* ---------------- RIGHT-SIDE SECTION NAV (dots) ---------------- */
+/* Increase z-index and create stacking context so dots remain visible above content */
 .section-nav{
   position:fixed;
   right:1.25rem;
@@ -301,30 +265,144 @@ main{
   display:flex;
   flex-direction:column;
   gap:.5rem;
-  z-index:40;
+  z-index:9999;               /* <<-- raised */
+  will-change:transform;
+  pointer-events:auto;
 }
 
 .dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:rgba(255,255,255,.3);
-  border:none;
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:#cbd5e1;              /* visible soft gray */
+  border:2px solid white;          /* keeps visible over orange */
   cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+.dot:hover{
+  background:#94a3b8;              /* darker on hover */
+  transform:scale(1.05);
 }
 
 .dot.active{
-  background:#f97316;
-  box-shadow:0 4px 12px rgba(249,115,22,.35);
+  background:#f97316;              /* your orange */
+  border:2px solid white;
+  box-shadow:0 6px 20px rgba(249,115,22,.35);
+  transform:scale(1.12);
 }
 
+
+/* keyboard focus */
 .section-nav button:focus{
   outline:2px solid #f97316;
   outline-offset:3px;
 }
 
+/* ---------------- Projects grid (three side-by-side) ---------------- */
+
+/* grid wrapper: three columns on wide screens, stack on small screens */
+.projects-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+  margin-top:1.75rem;
+}
+
+/* two and three column breakpoints */
+@media(min-width:700px){
+  .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media(min-width:980px){
+  .projects-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* visual card for each project */
+.project-card{
+  display:flex;
+  flex-direction:column;
+  background: linear-gradient(180deg,#fffdf9,#fff7f0);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow: 0 10px 24px rgba(124,45,18,0.06);
+  border:1px solid rgba(201,125,85,0.12);
+  transition: transform 240ms cubic-bezier(.22,.9,.35,1), box-shadow 240ms;
+  min-height:220px;
+}
+
+/* project thumbnail area */
+.project-thumb{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: transparent;
+  padding: 12px;
+  height:160px;
+  overflow:hidden;
+}
+.project-thumb img{
+  width:auto;
+  height:100%;
+  max-width:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* body: title + desc */
+.project-body{
+  padding:1rem 1.1rem 1.4rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.45rem;
+  flex:1 1 auto;
+}
+.project-title{
+  font-size:1.05rem;
+  margin:0;
+  font-weight:700;
+  color:#7c2d12;
+}
+.project-desc{
+  margin:0;
+  font-size:0.95rem;
+  color:rgba(0,0,0,0.6);
+  line-height:1.35;
+}
+
+/* hover / focus */
+.project-card:hover,
+.project-card:focus-within{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 42px rgba(124,45,18,0.09);
+}
+
+/* make images taller on wide screens for better balance */
+@media(min-width:880px){
+  .project-thumb{ height:200px; padding:14px; }
+}
+
+/* small screens: slightly tighter padding */
+@media(max-width:420px){
+  .project-body{ padding:0.9rem; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   .slides{ transition:none; }
-  .slide, .slide-card { transition:none; }
+  .project-card{ transition:none; transform:none; }
 }
+
+/* ------------------------------------------------------------------ */
+/* link behaviour and image fit (kept from earlier improvements)       */
+/* ------------------------------------------------------------------ */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:focus {
+  outline: 3px solid rgba(249,115,22,0.95);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.project-link { display:block; color:inherit; text-decoration:none; }

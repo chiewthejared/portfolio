@@ -14,6 +14,7 @@
     <span class="top-dot"></span>
   </div>
 
+  <!-- Section navigation (right side dots) -->
   <nav class="section-nav" aria-label="Sections">
     <button class="dot" data-target="hero" aria-label="Go to hero"></button>
     <button class="dot" data-target="about" aria-label="Go to about"></button>
@@ -49,7 +50,7 @@
     <section class="section section--about" id="about">
       <div class="wrap">
 
-        <h2>About</h2>
+        <h2>About Me</h2>
 
         <p class="lead">
           I’m a Computer Science student with hands-on experience in both software engineering and data science, passionate about building efficient, data-driven solutions.
@@ -60,97 +61,157 @@
         </p>
 
         <div class="experience-carousel" aria-roledescription="carousel">
-          <!-- Slides wrapper -->
           <div class="slides" id="slides">
 
-            <!-- Slide 0: Latest (Application Developer) — TEXT LEFT, IMAGE RIGHT -->
-            <article class="slide left" aria-roledescription="slide" aria-label="Application Developer">
+            <article class="slide left">
               <div class="slide-content">
                 <div class="job-title">Application Developer</div>
                 <div class="job-company">The Sturge-Weber Foundation · Part-time</div>
-                <div class="job-meta">Sep 2025 - Present · 6 mos — Tempe, Arizona, United States · Remote</div>
-
+                <div class="job-meta">Sep 2025 - Present · 6 mos — Tempe, Arizona · Remote</div>
                 <ul class="job-list">
                   <li>Implementing an iOS version of existing Android medical application</li>
-                  <li>Application for children with neurological conditions, especially epilepsy and Sturge-Weber syndrome</li>
+                  <li>Application for children with neurological conditions</li>
                   <li>Enhanced Android application with additional features and improved UI</li>
                 </ul>
               </div>
-
               <figure class="slide-image">
                 <img src="swf.jpg" alt="Sturge-Weber Foundation screenshot">
               </figure>
             </article>
 
-            <!-- Slide 1: Data Warehouse Intern — TEXT LEFT, IMAGE RIGHT -->
-            <article class="slide left" aria-roledescription="slide" aria-label="Data Warehouse Intern">
+            <article class="slide left">
               <div class="slide-content">
                 <div class="job-title">Data Warehouse Engineer Intern</div>
                 <div class="job-company">Cloud Space Co · Internship</div>
-                <div class="job-meta">Jun 2025 - Aug 2025 · 3 mos — Puchong, Selangor, Malaysia · Hybrid</div>
-
+                <div class="job-meta">Jun 2025 - Aug 2025 · Malaysia · Hybrid</div>
                 <ul class="job-list">
-                  <li>Google Cloud Premier Partner & 2025 Google Cloud Partner Of The Year — Malaysia</li>
-                  <li>Managed data warehousing processes using GCP (BigQuery, Google Drive)</li>
-                  <li>Built a basic chatbot using Vertex AI and Google AgentSpace during POC phase</li>
+                  <li>Managed data warehousing using GCP (BigQuery)</li>
+                  <li>Built chatbot using Vertex AI</li>
                 </ul>
               </div>
-
               <figure class="slide-image">
-                <img src="cloudspace.jpg" alt="Cloud Space logo / screenshot">
+                <img src="cloudspace.jpg" alt="Cloud Space screenshot">
               </figure>
             </article>
 
-          </div> <!-- .slides -->
+          </div>
 
-          <!-- Left and Right arrow controls -->
-          <button class="carousel-prev" id="prevBtn" aria-label="Previous experience">‹</button>
-          <button class="carousel-next" id="nextBtn" aria-label="Next experience">›</button>
-
-          <!-- small pager (dots) -->
-          <div class="carousel-pager" id="pager" aria-hidden="false"></div>
-        </div> <!-- .experience-carousel -->
+          <button class="carousel-prev" id="prevBtn">‹</button>
+          <button class="carousel-next" id="nextBtn">›</button>
+          <div class="carousel-pager" id="pager"></div>
+        </div>
 
       </div>
     </section>
 
     <section class="section section--work" id="work">
       <div class="wrap">
-        <h2>Selected Work</h2>
+        <h2>My Projects</h2>
         <p class="lead">
-          Thumbnail cards or links to projects. Keep this simple for now — you can expand later.
+          Some of my work from various projects, both personal and professional.
         </p>
+
+        <div class="projects-grid">
+
+          <!-- SWF APP -->
+          <a href="https://github.com/chiewthejared/androidcapstone" target="_blank" rel="noopener noreferrer" class="project-link">
+            <article class="project-card">
+              <figure class="project-thumb">
+                <img src="android.png" alt="SWF App screenshot">
+              </figure>
+              <div class="project-body">
+                <h3 class="project-title">SWF Android App</h3>
+                <p class="project-desc">Built with Android Studio - Github Repository</p>
+              </div>
+            </article>
+          </a>
+
+          <!-- CHATBOT -->
+          <a href="https://github.com/chiewthejared/cloudspace/blob/main/chatbot.py" target="_blank" rel="noopener noreferrer" class="project-link">
+            <article class="project-card">
+              <figure class="project-thumb">
+                <img src="chatbot.png" alt="Chatbot screenshot">
+              </figure>
+              <div class="project-body">
+                <h3 class="project-title">Local Chatbot Project</h3>
+                <p class="project-desc">Python + Vertex AI - Terminal interaction chatbot</p>
+              </div>
+            </article>
+          </a>
+
+          <!-- CODEALPHA -->
+          <a href="https://github.com/chiewthejared/CodeAlpha_Internship_Tasks" target="_blank" rel="noopener noreferrer" class="project-link">
+            <article class="project-card">
+              <figure class="project-thumb">
+                <img src="data.png" alt="Data classification screenshot">
+              </figure>
+              <div class="project-body">
+                <h3 class="project-title">Data Classification & Analysis</h3>
+                <p class="project-desc">Self-taught projects focused on data extraction and analysis</p>
+              </div>
+            </article>
+          </a>
+
+        </div>
+
       </div>
     </section>
 
   </main>
 
+  <!-- Keep original JS from your file (carousel + observer) and added dot-nav wiring -->
   <script>
-    // IntersectionObserver uses the main scroller root so sections become visible
+    // Grab main scroller and sections
+    const scroller = document.getElementById('scroller');
+    const sections = Array.from(document.querySelectorAll('.section'));
+    const navDots = Array.from(document.querySelectorAll('.section-nav .dot'));
+
+    // IntersectionObserver for sections (keeps section.visible class and updates active dot)
     (function(){
-      const rootEl = document.getElementById('scroller');
-      const opts = { root: rootEl, rootMargin: '0px', threshold: [0.25, 0.6] };
+      const opts = { root: scroller, rootMargin: '0px', threshold: 0.45 };
 
       const observer = new IntersectionObserver((entries)=>{
         entries.forEach(entry => {
           const el = entry.target;
-          if(entry.intersectionRatio >= 0.25){
+          if(entry.intersectionRatio >= 0.45){
             el.classList.add('visible');
+            // mark matching nav dot active
+            const id = el.id;
+            navDots.forEach(d => d.classList.toggle('active', d.dataset.target === id));
           } else {
             el.classList.remove('visible');
           }
         });
       }, opts);
 
-      document.querySelectorAll('.section').forEach(s => {
+      sections.forEach(s => {
         observer.observe(s);
         s.setAttribute('tabindex','-1');
       });
     })();
+
+    // Scroll the 'scroller' element to the target section when a dot is clicked
+    navDots.forEach(dot => {
+      dot.addEventListener('click', (e)=>{
+        const targetId = dot.dataset.target;
+        const targetEl = document.getElementById(targetId);
+        if(!targetEl) return;
+
+        // compute offsetTop relative to scroller
+        const scrollerRect = scroller.getBoundingClientRect();
+        const targetRect = targetEl.getBoundingClientRect();
+        const scrollTop = scroller.scrollTop + (targetRect.top - scrollerRect.top);
+
+        scroller.scrollTo({ top: Math.round(scrollTop), left: 0, behavior: 'smooth' });
+
+        // set active immediately for better UX
+        navDots.forEach(d => d.classList.toggle('active', d === dot));
+      });
+    });
   </script>
 
   <script>
-    // Carousel logic with prev and next
+    // Carousel logic with prev and next (unchanged, preserved from your file)
     (function(){
       const slidesEl = document.getElementById('slides');
       const slides = Array.from(document.querySelectorAll('.slide'));
@@ -177,12 +238,12 @@
 
       function show(n){
         index = (n + total) % total;
-        slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+        if (slidesEl) slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
         updatePager();
       }
 
-      nextBtn.addEventListener('click', ()=> show(index+1));
-      prevBtn.addEventListener('click', ()=> show(index-1));
+      if(nextBtn) nextBtn.addEventListener('click', ()=> show(index+1));
+      if(prevBtn) prevBtn.addEventListener('click', ()=> show(index-1));
 
       // keyboard navigation
       document.addEventListener('keydown', (e)=>{
