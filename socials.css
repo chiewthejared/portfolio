@@ -1,0 +1,103 @@
+:root{
+  --bg: #000;
+  --fg: #fff;
+  --accent: #FFC627;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Press Start 2P', cursive;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.socials-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 120px;   /* pushes content slightly right like a terminal */
+}
+
+/* Title (separate from list) */
+.terminal-title {
+  font-size: 18px;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+/* List container */
+.terminal-list {
+  font-size: 14px;
+  line-height: 1.6; /* much tighter */
+}
+
+/* Links */
+.terminal-link {
+  display: block;
+  text-decoration: none;
+  color: var(--fg);
+  margin: 8px 0;   /* tighter vertical spacing */
+  transition: opacity 0.2s ease;
+}
+
+.terminal-link:hover {
+  opacity: 0.6;
+}
+
+/* Blinking caret */
+.caret {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background: var(--fg);
+  margin-left: 6px;
+  animation: blink-caret 0.9s steps(1) infinite;
+}
+
+@keyframes blink-caret {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Continue button — EXACT home style */
+.continue-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  padding: 12px 18px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: var(--bg);
+  background: var(--fg);
+  border: 3px solid var(--fg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 60;
+}
+
+.continue-btn:hover,
+.continue-btn:focus {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.floating-social {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.floating-social[src*="letterboxd"],
+.floating-social[src*="handshake"],
+.floating-social[src*="github"] {
+  width: 72px;
+  height: 72px;
+}

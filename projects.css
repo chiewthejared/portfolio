@@ -1,0 +1,218 @@
+:root{
+  --bg: #000;
+  --fg: #fff;
+  --accent: #FFC627; /* uses same accent as socials */
+}
+
+/* Global reset + base font (matches socials exactly) */
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Press Start 2P', cursive;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout: split left (list) and right (preview) */
+.projects-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* LEFT column — mirrors socials spacing and typography exactly */
+.left-col {
+  width: 36%;
+  padding-left: 120px;   /* pushes content right like terminal (same as socials.css). */
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.terminal-title {
+  font-size: 18px;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+.terminal-list {
+  font-size: 14px;
+  line-height: 1.6; /* same tight spacing as socials */
+}
+
+/* List items styled like terminal links (but not external anchors here) */
+.terminal-link {
+  display: block;
+  text-decoration: none;
+  color: var(--fg);
+  margin: 8px 0;   /* tighter vertical spacing */
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.terminal-link:hover {
+  opacity: 0.6;
+}
+
+/* Blinking caret (same as socials) */
+.caret {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background: var(--fg);
+  margin-left: 6px;
+  animation: blink-caret 0.9s steps(1) infinite;
+}
+
+@keyframes blink-caret {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Continue button — EXACT same home style */
+.continue-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  padding: 12px 18px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: var(--bg);
+  background: var(--fg);
+  border: 3px solid var(--fg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 60;
+}
+
+.continue-btn:hover,
+.continue-btn:focus {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* RIGHT column preview — matches aesthetic but keeps a boxed preview */
+.right-col {
+  width: 64%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Preview box styling (keeps retro look, centered within right column) */
+.preview-box {
+  width: 70%;
+  border: 2px solid var(--fg);
+  padding: 28px;
+  box-shadow: 0 0 20px #00ffcc33;
+  background: rgba(255,255,255,0.01);
+}
+
+/* Top image in preview - show whole image, centered, with padding */
+.preview-box .img-wrap {
+  width: 100%;
+  height: 240px;           /* keeps the same box height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;        /* ensures image can't overflow the inner border */
+  background: #050505;     /* subtle background so letterboxing isn't obvious */
+  margin-bottom: 18px;
+  border: 2px solid var(--accent); /* keep yellow frame */
+  box-sizing: border-box;
+}
+
+/* actual img uses contain so whole image fits within the area */
+.preview-box .img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;     /* shows entire image, preserves aspect ratio */
+  display: block;
+}
+
+/* Project title: different font (Orbitron) and uses your new color (accent) */
+.preview-box h2 {
+  margin: 0 0 12px 0;
+  color: var(--accent);           /* project title color changed — not orange */
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* Description uses same monospace terminal font as socials */
+.preview-box p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+/* Placeholder styling for preview when no project selected */
+.preview-box.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.preview-box.placeholder img {
+  display: none;
+}
+
+.preview-box.placeholder h2 {
+  color: var(--fg);
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+}
+
+.preview-box.placeholder p {
+  display: none;
+}
+
+/* Repo button under the preview box content */
+.repo-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 12px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: var(--bg);
+  background: var(--fg);
+  border: 2px solid var(--fg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.repo-btn:hover {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--accent);
+}
+
+/* When previewBox is in placeholder mode: remove image frame and hide repo button */
+.preview-box.placeholder .img-wrap {
+  display: none !important;    /* hide the whole framed image area (removes yellow border) */
+}
+
+/* also hide repo button while placeholder is active */
+.preview-box.placeholder .repo-btn {
+  display: none !important;
+}
+
+/* keep placeholder centered (already present but ensuring vertical center) */
+.preview-box.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column; /* keep the placeholder text stacked cleanly */
+  min-height: 320px;      /* ensures it stays visually centered within the same box height */
+}

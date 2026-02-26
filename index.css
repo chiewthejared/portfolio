@@ -1,0 +1,121 @@
+/* index.css - full file */
+
+/* Root colors */
+:root {
+    --bg: #000;
+    --fg: #fff;
+}
+
+/* Basic reset & layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: 'Press Start 2P', cursive;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Screens container */
+.screen {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.screen.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 0 0 30px 0;
+    letter-spacing: 4px;
+}
+
+/* Enter Button (pixelated, blinking) */
+.enter-btn {
+    padding: 12px 28px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    background: transparent;
+    color: var(--fg);
+    border: 3px solid var(--fg);
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    box-shadow: none;
+    margin-top: 4px;
+    transform: translateZ(0);
+}
+
+/* Press any key prompt (blinking, smaller) */
+.press-any {
+    margin-top: 18px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    user-select: none;
+}
+
+/* blink animation for the button and press-any (synchronized) */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.15; }
+}
+
+/* use identical animation settings for both to keep them in sync */
+.enter-btn.blink,
+.press-any.blink {
+    animation: blink 1s steps(1, end) infinite;
+}
+
+/* Hover invert effect (works after user interaction) */
+.enter-btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+}
+
+/* Focus ring for keyboard users */
+.enter-btn:focus {
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
+}
+
+/* small-screen adjustment */
+@media (max-width: 480px) {
+    h1 { font-size: 16px; }
+    .enter-btn { padding: 10px 20px; font-size: 10px; }
+}
+
+/* ---------- Home page styling is often in home.css, but if you kept some styles here
+   you can add or adjust them. This file is specifically for the index screen visuals. */
+
+/* Optional: keep a subtle selection color */
+::selection {
+    background: rgba(255,255,255,0.08);
+}
+
+/* Make sure images are pixelated when scaled (if needed anywhere) */
+img {
+    image-rendering: pixelated;
+}
+
+.portfolio-title {
+    color: #ff8800;
+}

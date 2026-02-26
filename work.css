@@ -1,0 +1,174 @@
+:root{
+  --bg:#000;
+  --fg:#fff;
+  --muted:rgba(255,255,255,0.15);
+  --accent:#FFC627;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  height:100%;
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Press Start 2P', cursive;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{
+  padding:40px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+}
+
+/* Title */
+.title{
+  font-size:20px;
+  letter-spacing:2px;
+}
+
+/* Layout */
+.container{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:40px;
+}
+
+/* Log List */
+.log-list ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.log-item{
+  padding:16px;
+  margin-bottom:20px;
+  cursor:pointer;
+  border:2px solid var(--fg);
+  transition:all 0.2s ease;
+}
+
+.log-item:hover{
+  background:var(--fg);
+  color:var(--bg);
+}
+
+.log-title{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.log-time{
+  font-size:12px;
+  opacity:0.6;
+}
+
+/* Right panel */
+.log-view{
+  min-height:300px;
+}
+
+.placeholder{
+  font-size:12px;
+  opacity:0.6;
+}
+
+/* Entry */
+.entry-title{
+  font-size:18px;
+  margin-bottom:10px;
+  color: #ff8800;
+}
+
+.entry-meta{
+  font-size:12px;
+  opacity:0.6;
+  margin-bottom:20px;
+}
+
+.entry-body{
+  font-size:12px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  min-height:200px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Caret */
+.caret{
+  display:inline-block;
+  width:10px;
+  height:16px;
+  background:var(--fg);
+  margin-left:6px;
+  animation:blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0;}
+  100%{opacity:1;}
+}
+
+/* Back button */
+.btn{
+  margin-top:20px;
+  font-size:12px;
+  background:transparent;
+  border:2px solid var(--fg);
+  color:var(--fg);
+  padding:10px 14px;
+  cursor:pointer;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.btn:hover{
+  background:var(--fg);
+  color:var(--bg);
+}
+
+/* CONTINUE BUTTON — copied/adapted from projects.css so it's identical */
+.continue-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  padding: 12px 18px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: var(--bg);
+  background: var(--fg);
+  border: 3px solid var(--fg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 60;
+}
+
+.continue-btn:hover,
+.continue-btn:focus {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .container{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Clickable repo links (same style as socials) */
+.terminal-link{
+  text-decoration:none;
+  color:var(--fg);
+  transition:opacity 0.2s ease;
+}
+
+.terminal-link:hover{
+  opacity:0.6;
+}

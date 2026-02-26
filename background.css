@@ -1,0 +1,146 @@
+/* background.css (updated to accept --start and --end pixel vars) */
+
+:root{
+  --bg-color: #000;
+  --text-color: #f6f1e6;
+  --accent: #ff8a00;
+  --scroll-duration: 45s; /* overridden by JS */
+  --start: 100vh; /* px or vh string provided by JS */
+  --end: -200vh;
+}
+
+* { box-sizing: border-box; }
+
+html,body{
+  height:100%;
+  margin:0;
+  background:
+  /* Large stars */
+  radial-gradient(3px 3px at 10% 20%, rgba(255,255,255,0.95) 50%, transparent 51%),
+  radial-gradient(3px 3px at 30% 70%, rgba(255,255,255,0.95) 50%, transparent 51%),
+  radial-gradient(3px 3px at 60% 40%, rgba(255,255,255,0.95) 50%, transparent 51%),
+  radial-gradient(3px 3px at 85% 60%, rgba(255,255,255,0.95) 50%, transparent 51%),
+
+  /* Medium stars */
+  radial-gradient(2.2px 2.2px at 20% 30%, rgba(255,255,255,0.9) 50%, transparent 51%),
+  radial-gradient(2.2px 2.2px at 70% 80%, rgba(255,255,255,0.9) 50%, transparent 51%),
+  radial-gradient(2.2px 2.2px at 40% 60%, rgba(255,255,255,0.9) 50%, transparent 51%),
+  radial-gradient(2.2px 2.2px at 75% 25%, rgba(255,255,255,0.9) 50%, transparent 51%),
+  radial-gradient(2.2px 2.2px at 15% 85%, rgba(255,255,255,0.9) 50%, transparent 51%),
+
+  /* Small stars */
+  radial-gradient(1.6px 1.6px at 55% 15%, rgba(255,255,255,0.85) 50%, transparent 51%),
+  radial-gradient(1.6px 1.6px at 90% 50%, rgba(255,255,255,0.85) 50%, transparent 51%),
+  radial-gradient(1.6px 1.6px at 5% 55%, rgba(255,255,255,0.85) 50%, transparent 51%),
+  radial-gradient(1.6px 1.6px at 95% 10%, rgba(255,255,255,0.85) 50%, transparent 51%),
+  radial-gradient(1.6px 1.6px at 45% 90%, rgba(255,255,255,0.85) 50%, transparent 51%),
+
+  /* Dark space base */
+  radial-gradient(ellipse at center, rgba(20,20,20,1) 0%, rgba(0,0,0,1) 70%);
+  font-family: 'Press Start 2P', cursive;
+  -webkit-font-smoothing:antialiased;
+  color:var(--text-color);
+}
+
+/* Stage masks the scrolling content */
+#credits-stage {
+  position:relative;
+  height:100vh;
+  width:100%;
+  overflow:hidden;
+  padding:6vh 6vw;
+}
+
+/* Container centered horizontally */
+#credits {
+  position:relative;
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  text-align:center;
+}
+
+/* The moving block: we use transform translateY(var(--start)) as the starting position */
+.credits-inner {
+  position:absolute;
+  left:0;
+  width:100%;
+  /* start offscreen below via transform var */
+  transform: translateY(var(--start));
+  animation: rollUp linear infinite;
+  animation-duration: var(--scroll-duration);
+  animation-fill-mode: both; /* respect starting transform before animation begins */
+  will-change: transform;
+}
+
+/* Sections */
+.section {
+  margin: 40px 0;
+  line-height:1.8;
+}
+
+.section h2 {
+  color: var(--accent);
+  font-size:14px;
+  margin: 0 0 16px 0;
+  letter-spacing: 2px;
+}
+
+.section p {
+  margin: 8px 0;
+  font-size:12px;
+  white-space: pre-wrap;
+}
+
+/* Fade top/bottom */
+#credits-stage::before,
+#credits-stage::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 16vh;
+  pointer-events: none;
+  z-index: 5;
+}
+#credits-stage::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+#credits-stage::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+/* Use CSS variables for start and end positions (set by JS) */
+@keyframes rollUp {
+  0%   { transform: translateY(var(--start)); }
+  100% { transform: translateY(var(--end)); }
+}
+
+/* Continue Button */
+
+.continue-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: 14px 18px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 20;
+}
+
+.continue-btn.show {
+  opacity: 1;
+}
+
+.continue-btn:hover {
+  background: var(--accent);
+  color: black;
+}

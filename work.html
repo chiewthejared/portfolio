@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Work — Journal</title>
+
+  <!-- Same font as home -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="work.css" />
+</head>
+<body>
+  <main class="page">
+
+    <header class="topbar">
+      <h1 class="title">WORK.LOG</h1>
+    </header>
+
+    <section class="container">
+
+      <aside class="log-list">
+        <ul id="logs"></ul>
+      </aside>
+
+      <article class="log-view">
+
+        <div class="placeholder" id="placeholder">
+          &gt; Select log entry_
+        </div>
+
+        <div class="entry" id="entryContent" hidden>
+          <div class="entry-header">
+            <div class="entry-title" id="entryTitle"></div>
+            <div class="entry-meta" id="entryMeta"></div>
+          </div>
+
+          <pre class="entry-body" id="entryBody"></pre>
+
+          <button id="backButton" class="btn">← BACK</button>
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- CONTINUE BUTTON (same as your Projects page) -->
+  <button id="continueBtn" class="continue-btn">CONTINUE ›</button>
+
+  <script src="work.js"></script>
+</body>
+</html>

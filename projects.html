@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Jared Chiew — Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+
+  <main class="projects-wrap">
+
+    <!-- LEFT: same structure & spacing as socials -->
+    <section class="left-col">
+      <h1 class="terminal-title">
+        PROJECTS
+      </h1>
+
+      <nav class="terminal-list" id="projectsList">
+        <!-- JS will populate the 5 project items here to match socials link styling -->
+      </nav>
+
+      <!-- keep the same caret as socials -->
+      <span class="caret" id="leftCaret"></span>
+    </section>
+
+    <aside class="right-col">
+  <div class="preview-box" id="previewBox">
+    <div class="img-wrap">
+      <img id="projectImage" src="images/project1.jpg" alt="project image">
+    </div>
+
+    <h2 id="projectTitle">Portfolio Website</h2>
+    <p id="projectDescription">
+      A retro-styled personal portfolio built with HTML, CSS, and JavaScript. Features animated typing effects, dynamic sections, and custom UI transitions.
+    </p>
+
+    <!-- GitHub repo button (populated/hidden by JS) -->
+    <a id="repoBtn" class="repo-btn" href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  </div>
+</aside>
+
+  </main>
+
+  <button id="continueBtn" class="continue-btn">
+    CONTINUE ›
+  </button>
+
+  <script src="projects.js"></script>
+</body>
+</html>

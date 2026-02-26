@@ -1,0 +1,291 @@
+/* ===== FULL menu.css ===== */
+
+:root{
+  --bg:#000000;
+  --panel:#0b1220;
+  --fg:#C7F2E6;
+  --muted:rgba(199,242,230,0.12);
+  --bevel-light: rgba(255,255,255,0.08);
+  --bevel-dark: rgba(0,0,0,0.5);
+}
+
+/* Base */
+*{box-sizing:border-box}
+
+html,body{
+  height:100%;
+  margin:0;
+  background:#000000; /* pure black */
+  font-family:'Press Start 2P',monospace;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Center container */
+.menu-wrap{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+}
+
+/* Header */
+.menu-header{
+  margin-bottom:40px;
+  text-align:center;
+}
+
+.brand{
+  font-size:30px;
+  letter-spacing:1px;
+  color:#ff8800; /* your orange */
+  margin-bottom:8px;
+}
+
+.hint{
+  font-size:10px;
+  color:#ffffff;
+}
+
+/* ===== GRID LAYOUT ===== */
+/* 3 columns like your mock */
+.app-grid{
+  display:grid;
+  grid-template-columns: repeat(6, 180px); /* 6 small columns */
+  grid-auto-rows: 230px;
+  gap:28px;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Each tile spans 2 columns (so width stays 360px) */
+.app{
+  grid-column: span 2;
+  height:230px;
+}
+
+/* ===== TILE STYLE ===== */
+/* Fixed-size tiles so all sections look identical */
+.app{
+  appearance:none;
+  border:0;
+  background:linear-gradient(180deg,var(--panel),#08121c);
+  color:var(--fg);
+
+  /* fixed width comes from grid column; fix the height explicitly */
+  height:230px;          /* <--- enforce identical heights */
+  padding:30px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  cursor:pointer;
+
+  border-radius:8px;
+  border:4px solid rgba(255,255,255,0.05);
+
+  box-shadow:
+    inset 3px 3px 0 var(--bevel-light),
+    inset -3px -3px 0 var(--bevel-dark),
+    0 18px 40px rgba(0,0,0,0.6);
+
+  transition: transform .12s ease, box-shadow .12s ease;
+  overflow:hidden; /* prevents subtitle from pushing layout out */
+}
+
+/* Hover */
+.app:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 26px 50px rgba(0,0,0,0.75),
+    inset 3px 3px 0 rgba(255,255,255,0.06);
+}
+
+/* Title (KEEP font-family inside as requested) */
+.app .app-title{
+  font-family:'Press Start 2P',monospace;  /* preserved */
+  font-size:22px;
+  letter-spacing:1px;
+  line-height:1.25;
+  word-break:break-word;
+  max-width: 92%;   /* prevents overflow */
+  white-space: normal;
+  margin: 0;
+  padding: 0;
+}
+
+/* Subtitle */
+.app .app-desc{
+  font-size:12px;
+  margin-top:14px;
+  opacity:0.85;
+}
+
+/* Decorative bevel strips (keeps look) */
+.app::before{
+  content:'';
+  position:absolute;
+  left:10px; top:10px; right:10px;
+  height:8px;
+  background:linear-gradient(90deg,rgba(255,255,255,0.03),transparent);
+  pointer-events:none;
+}
+.app::after{
+  content:'';
+  position:absolute;
+  left:10px; bottom:10px; right:10px;
+  height:8px;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,0.14));
+  pointer-events:none;
+}
+
+/* ===== POSITIONING ===== */
+
+/* Top row */
+.app.top-left   { grid-column: 1 / span 2; }  /* columns 1–2 */
+.app.top-center { grid-column: 3 / span 2; }  /* columns 3–4 */
+.app.top-right  { grid-column: 5 / span 2; }  /* columns 5–6 */
+
+/* Bottom row (perfectly centered between top tiles) */
+.app.lower.left  { grid-column: 2 / span 2; } /* between ABOUT & WORK */
+.app.lower.right { grid-column: 4 / span 2; } /* between WORK & PROJECTS */
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width:1200px){
+  .app-grid{
+    grid-template-columns: repeat(2, 320px);
+    grid-auto-rows: 200px;
+  }
+  /* Adapts layout: make the right top tile span both columns if needed */
+  .app.top-right{
+    grid-column:1 / span 2;
+  }
+  .app{ height:200px; }
+}
+
+@media (max-width:700px){
+  .app-grid{
+    grid-template-columns: 1fr;
+    gap:18px;
+  }
+
+  .app{
+    height:180px;
+    padding:22px;
+  }
+
+  .app .app-title{
+    font-size:18px;
+  }
+}
+
+/* App-open animation: clone expands to cover viewport */
+.app-clone {
+  position: fixed;
+  z-index: 1100;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 480ms cubic-bezier(.2,.8,.2,1);
+  /* keep the same look as tiles initially, but we'll set inline styles */
+  background: linear-gradient(180deg,var(--panel),#08121c);
+  color: var(--fg);
+  border: 4px solid rgba(255,255,255,0.05);
+  box-shadow:
+    inset 3px 3px 0 var(--bevel-light),
+    inset -3px -3px 0 var(--bevel-dark),
+    0 18px 40px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Final full-screen state: black background and no bevel */
+.app-clone--open {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 40px !important;
+  border-radius: 0 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  background: #000 !important;         /* becomes black */
+}
+
+/* Hide content while expanding for a cleaner wipe — text fades out */
+.app-clone .clone-inner {
+  transition: opacity 220ms linear;
+}
+.app-clone--open .clone-inner {
+  opacity: 0;
+}
+
+/* small safeguard for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .app-clone { transition: none; }
+  .app-clone .clone-inner { transition: none; }
+}
+
+/* ===== LOADING SCREEN ===== */
+
+.loading-screen{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#fff;
+  z-index:2000;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  font-family:'Press Start 2P',monospace;
+  text-align:center;
+}
+
+.loading-title{
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.loading-dots span.active{
+  opacity:1;
+}
+
+/* Retro typing dots style */
+
+.loading-dots{
+  font-size:22px;
+  letter-spacing:2px;
+  white-space:nowrap;
+  color:#ffffff;
+}
+
+.loading-dots span{
+  color:#ffffff;
+}
+
+.loading-cursor{
+  animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0;}
+  100%{opacity:1;}
+}

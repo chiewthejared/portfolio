@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Menu — Jared Chiew</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <main class="menu-wrap" role="main">
+    <header class="menu-header">
+      <h1 class="brand">PORTFOLIO MENU</h1>
+      <p class="hint">Use mouse to select option</p>
+    </header>
+
+    <section class="app-grid" role="navigation" aria-label="Main menu">
+      <!-- Top row (columns 1,3,5) -->
+      <button class="app top-left"    data-target="home.html"     data-index="0">
+        <span class="app-title">ABOUT ME</span>
+        <span class="app-desc">Introduction</span>
+      </button>
+
+      <button class="app top-center"  data-target="work.html"      data-index="1">
+        <span class="app-title">WORK EXPERIENCE</span>
+        <span class="app-desc">Internships & Roles</span>
+      </button>
+
+      <button class="app top-right"   data-target="projects.html"  data-index="2">
+        <span class="app-title">PROJECTS</span>
+        <span class="app-desc">Repos & Demos</span>
+      </button>
+
+      <!-- Bottom row (columns 2 & 4) - pyramid between top buttons -->
+      <button class="app lower left"  data-target="socials.html"    data-index="3">
+        <span class="app-title">SOCIALS / LINKS</span>
+        <span class="app-desc">GitHub, LinkedIn</span>
+      </button>
+
+      <button class="app lower right" data-target="background.html" data-index="4">
+        <span class="app-title">BACKGROUND</span>
+        <span class="app-desc">More about me</span>
+      </button>
+    </section>
+
+    <!-- footer removed per request (was removed) -->
+  </main>
+
+  <script src="menu.js"></script>
+</body>
+</html>
