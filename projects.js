@@ -6,19 +6,19 @@ const projects = [
   {
     title: "SWF Java App",
     image: "images/swf.jpg",
-    description: "An Android Medical Application built with Java and XML, on Android Studio for Sturge-Weber Foundation.",
+    description: "An Android Medical Application built with Java and XML, on Android Studio for Sturge-Weber Foundation. Worked on UI and implementing features like Timers, Articles/Videos Page, Medical Analytics",
     repo: "https://github.com/chiewthejared/androidcapstone"
   },
   {
     title: "Local Chatbot Project",
     image: "images/chatbot.png",
-    description: "Simple Python file that handles input and output for a chatbot linked to Vertex AI.",
+    description: "Simple Python file that handles input and output for a chatbot linked to Vertex AI, connected to a data store with structured data (PDF, json, etc).",
     repo: "https://github.com/chiewthejared/cloudspace/blob/main/chatbot.py"
   },
   {
     title: "Analysis of Tips Dataset",
     image: "images/data.png",
-    description: "Simple data analysis of the 'Tips' dataset using Python, Pandas, and Matplotlib to explore tipping patterns.",
+    description: "Simple data analysis with various visualizations of the 'Tips' dataset using Python, Pandas, and Matplotlib to explore tipping patterns.",
     repo: "https://github.com/chiewthejared/data/blob/main/Assignment%201.ipynb"
   },
   {

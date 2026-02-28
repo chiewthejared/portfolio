@@ -4,8 +4,13 @@
   --bg-color: #000;
   --text-color: #f6f1e6;
   --accent: #ff8a00;
-  --scroll-duration: 45s; /* overridden by JS */
-  --start: 100vh; /* px or vh string provided by JS */
+
+  --blue-accent: #00bfff;
+  --green-accent: #00ff66;
+  --purple-accent: #b14cff;
+
+  --scroll-duration: 45s;
+  --start: 100vh;
   --end: -200vh;
 }
 
@@ -40,6 +45,7 @@ html,body{
   font-family: 'Press Start 2P', cursive;
   -webkit-font-smoothing:antialiased;
   color:var(--text-color);
+  background-color: var(--bg-color);
 }
 
 /* Stage masks the scrolling content */
@@ -67,7 +73,7 @@ html,body{
   width:100%;
   /* start offscreen below via transform var */
   transform: translateY(var(--start));
-  animation: rollUp linear infinite;
+  animation: rollUp linear forwards;
   animation-duration: var(--scroll-duration);
   animation-fill-mode: both; /* respect starting transform before animation begins */
   will-change: transform;
@@ -91,6 +97,12 @@ html,body{
   font-size:12px;
   white-space: pre-wrap;
 }
+
+/* Per-section title colors */
+.skills h2 { color: var(--accent); }      /* Orange — SKILLS */
+.courses h2 { color: var(--blue-accent); }/* Blue  — RELEVANT COURSES */
+.education h2 { color: var(--green-accent); } /* Green — EDUCATION */
+.achievements h2 { color: var(--purple-accent); } /* Purple — ACHIEVEMENTS */
 
 /* Fade top/bottom */
 #credits-stage::before,
@@ -144,3 +156,11 @@ html,body{
   background: var(--accent);
   color: black;
 }
+
+/* Small responsive tweak so the credits content doesn't get too wide on mobile */
+@media (max-width: 520px) {
+  #credits-stage { padding: 4vh 4vw; }
+  .section h2 { font-size: 12px; }
+  .section p { font-size: 11px; }
+}
+

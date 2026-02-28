@@ -289,3 +289,16 @@ html,body{
   50%{opacity:0;}
   100%{opacity:1;}
 }
+
+.menu-footer{
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-text{
+  font-size: 10px;      /* matches .hint */
+  color: #ffffff;       /* matches .hint */
+  font-family: 'Press Start 2P', monospace;
+}

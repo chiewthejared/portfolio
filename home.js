@@ -5,7 +5,8 @@
 const LINES = [
   "Jared Chiew",
   "Senior Computer Science Student @ Arizona State University",
-  "Seeking Data/Software Positions Starting May 2026"
+  "Seeking Data/Software-Related Full-Time/Part-Time/Internships Starting May 2026",
+  "(More info about me in the Background Page)"
 ];
 
 const typingContainer = document.getElementById("typing");
