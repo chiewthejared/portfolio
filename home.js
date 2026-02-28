@@ -12,39 +12,8 @@ const LINES = [
 const typingContainer = document.getElementById("typing");
 const homeWrap = document.querySelector(".home-wrap");
 const continueBtn = document.getElementById("continueBtn");
-let audioCtx = null;
 let typingCompletedAt = null;
 let continueTimerId = null;
-
-// create audio context lazily (permission-friendly)
-function ensureAudioCtx() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-}
-
-// tiny typing blip
-function playTypeBlip() {
-  try {
-    ensureAudioCtx();
-    const now = audioCtx.currentTime;
-    const g = audioCtx.createGain();
-    g.gain.setValueAtTime(0.0001, now);
-    g.gain.exponentialRampToValueAtTime(0.18, now + 0.001);
-    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
-    g.connect(audioCtx.destination);
-
-    const o = audioCtx.createOscillator();
-    o.type = 'square';
-    const freq = 560 + Math.round(Math.random() * 120);
-    o.frequency.setValueAtTime(freq, now);
-    o.connect(g);
-    o.start(now);
-    o.stop(now + 0.07);
-  } catch (e) {
-    // ignore audio errors silently
-  }
-}
 
 // helper: sleep
 function wait(ms) { return new Promise(res => setTimeout(res, ms)); }
@@ -57,7 +26,6 @@ async function typeLine(text, speed = 35) {
 
   for (let i = 0; i < text.length; i++) {
     lineWrap.textContent += text[i];
-    playTypeBlip();
     const jitter = Math.random() * 35;
     await wait(speed + jitter);
   }
@@ -128,12 +96,3 @@ window.addEventListener("load", () => {
   homeWrap.classList.add("hidden");
   setTimeout(runTypingSequence, 180);
 });
-
-// allow clicking or pressing a key to resume audio permission and play one blip
-document.addEventListener("click", () => {
-  try { ensureAudioCtx(); } catch (e) {}
-}, { once: true });
-
-document.addEventListener("keydown", () => {
-  try { ensureAudioCtx(); } catch (e) {}
-}, { once: true });
