@@ -4,27 +4,33 @@
 
 const projects = [
   {
+    title: "Spotify Wrapped Analysis",
+    image: "images/spotify.png",
+    description: "Conducted a data analysis project on Spotify song trends, comparing 2025 hits with all-time popular tracks. Used R (ggplot2, plotly, dplyr) to create interactive visualizations and uncover insights showing that audio features alone do not strongly predict streaming success.",
+    repo: "https://rpubs.com/chiewthejared/spotifywrapped"
+  },
+  {
     title: "SWF Java App",
     image: "images/swf.jpg",
-    description: "An Android Medical Application built with Java and XML, on Android Studio for Sturge-Weber Foundation. Worked on UI and implementing features like Timers, Articles/Videos Page, Medical Analytics",
+    description: "An Android application developed in Java using Android Studio, with user interfaces built in XML, designed to help users track and manage seizure-related health information. The app allows users to record the time and details of seizure events, securely store medical and doctor information, visualize seizure patterns through analytics and charts, and manage appointments through an integrated medical calendar. The application follows a structured Android architecture and uses responsive UI components to provide an intuitive interface for monitoring and managing seizure data.",
     repo: "https://github.com/chiewthejared/androidcapstone"
   },
   {
     title: "Local Chatbot Project",
     image: "images/chatbot.png",
-    description: "Simple Python file that handles input and output for a chatbot linked to Vertex AI, connected to a data store with structured data (PDF, json, etc).",
+    description: "Simple Python file that handles input and output for a chatbot linked to Vertex AI, connected to a data store with structured data (PDF, json, etc). Used as a demo, to showcase the concept of self-developed chatbot agents, for clients during POC phase.",
     repo: "https://github.com/chiewthejared/cloudspace/blob/main/chatbot.py"
   },
   {
     title: "Analysis of Tips Dataset",
     image: "images/data.png",
-    description: "Simple data analysis with various visualizations of the 'Tips' dataset using Python, Pandas, and Matplotlib to explore tipping patterns.",
+    description: "Simple data analysis with various visualizations of the 'Tips' dataset using Python, Pandas, and Matplotlib to explore tipping patterns. Used as an assignment submission for Data Visualization's class at ASU.",
     repo: "https://github.com/chiewthejared/data/blob/main/Assignment%201.ipynb"
   },
   {
     title: "Portfolio Website",
     image: "images/portfolio.png",
-    description: "A personal, retro video game-inspired portfolio website built with HTML, CSS, and JavaScript to showcase projects and skills.",
+    description: "A personal portfolio website developed using HTML, CSS, and JavaScript to showcase projects, technical skills, and professional experience. The site features responsive design, interactive UI elements, and structured sections for projects, about, and contact information. It is deployed and hosted using GitHub Pages.",
     repo: "https://github.com/chiewthejared/portfolio"
   }
 ];
