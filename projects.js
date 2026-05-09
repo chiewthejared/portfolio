@@ -7,7 +7,7 @@ const projects = [
     title: "COVID-19 Data Dashboard",
     image: "images/covid19.png",
     description: "Developed an interactive COVID-19 data dashboard using real-world data from Our World in Data, enabling users to explore global trends in cases and deaths across countries and continents. Built with JavaScript and D3.js, the dashboard features dynamic filtering by continent, year, and country, with linked visualizations including a time-series line chart, a top countries bar chart, and a scatterplot analyzing relationships between cases, deaths, and population. The project emphasizes data cleaning, transformation, and responsive design to support intuitive exploratory analysis.",
-    repo: "https://observablehq.com/@cses478/milestone1"
+    repo: "https://observablehq.com/@cses478/covid-dashboard"
   },
   {
     title: "Spotify Wrapped Analysis",
