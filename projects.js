@@ -4,10 +4,16 @@
 
 const projects = [
   {
-    title: "COVID-19 Data Dashboard",
+    title: "Resume RAG Chatbot",
     image: "images/rag-chatbot.png",
     description: "Designed and developed a Retrieval-Augmented Generation (RAG) chatbot that enables natural language querying of my professional background by indexing multiple resumes (Data Analyst, Data Engineer, Data Science, Software Developer, Software Engineer) and using Google Gemini embeddings to understand content, FAISS for efficient vector retrieval, and LangChain to orchestrate the pipeline – when a user asks a question, the system retrieves the most relevant sections and generates concise, fact‑based answers, all wrapped in a Streamlit UI and deployed on Streamlit Cloud for a seamless, interactive experience.",
     repo: "https://github.com/chiewthejared/ragchatbot"
+  },
+  {
+    title: "COVID-19 Power BI Dashboard",
+    image: "images/powerbi.png",
+    description: "Designed and developed an interactive COVID-19 analytics dashboard in Power BI to visualize global pandemic trends from 2020–2023, featuring Azure Maps for geographic analysis, dynamic KPI cards for total cases, deaths, and death rate, comparative continent and country-level insights, yearly trend analysis, and interactive filtering capabilities. Performed data cleaning and transformation using Power Query and DAX, including handling null values, creating time-series and latest snapshot datasets, and implementing a custom dark-themed dashboard with consistent visual styling for improved usability and presentation.",
+    repo: "https://app.powerbi.com/groups/me/reports/27488b6f-a505-40d5-8256-e9777f6ef236/7951e7be1ed69008f848?experience=power-bi"
   },
   {
     title: "COVID-19 Data Dashboard",
@@ -26,18 +32,6 @@ const projects = [
     image: "images/swf.jpg",
     description: "An Android application developed in Java using Android Studio, with user interfaces built in XML, designed to help users track and manage seizure-related health information. The app allows users to record the time and details of seizure events, securely store medical and doctor information, visualize seizure patterns through analytics and charts, and manage appointments through an integrated medical calendar. The application follows a structured Android architecture and uses responsive UI components to provide an intuitive interface for monitoring and managing seizure data.",
     repo: "https://github.com/chiewthejared/androidcapstone"
-  },
-  {
-    title: "Local Chatbot Project",
-    image: "images/chatbot.png",
-    description: "Simple Python file that handles input and output for a chatbot linked to Vertex AI, connected to a data store with structured data (PDF, json, etc). Used as a demo, to showcase the concept of self-developed chatbot agents, for clients during POC phase.",
-    repo: "https://github.com/chiewthejared/cloudspace/blob/main/chatbot.py"
-  },
-  {
-    title: "Analysis of Tips Dataset",
-    image: "images/data.png",
-    description: "Simple data analysis with various visualizations of the 'Tips' dataset using Python, Pandas, and Matplotlib to explore tipping patterns. Used as an assignment submission for Data Visualization's class at ASU.",
-    repo: "https://github.com/chiewthejared/data/blob/main/Assignment%201.ipynb"
   },
   {
     title: "Portfolio Website",
