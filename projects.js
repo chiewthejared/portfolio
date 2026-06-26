@@ -5,6 +5,12 @@
 const projects = [
   {
     title: "COVID-19 Data Dashboard",
+    image: "images/rag-chatbot.png",
+    description: "Designed and developed a Retrieval-Augmented Generation (RAG) chatbot that enables natural language querying of my professional background by indexing multiple resumes (Data Analyst, Data Engineer, Data Science, Software Developer, Software Engineer) and using Google Gemini embeddings to understand content, FAISS for efficient vector retrieval, and LangChain to orchestrate the pipeline – when a user asks a question, the system retrieves the most relevant sections and generates concise, fact‑based answers, all wrapped in a Streamlit UI and deployed on Streamlit Cloud for a seamless, interactive experience.",
+    repo: "https://github.com/chiewthejared/ragchatbot"
+  },
+  {
+    title: "COVID-19 Data Dashboard",
     image: "images/covid19.png",
     description: "Developed an interactive COVID-19 data dashboard using real-world data from Our World in Data, enabling users to explore global trends in cases and deaths across countries and continents. Built with JavaScript and D3.js, the dashboard features dynamic filtering by continent, year, and country, with linked visualizations including a time-series line chart, a top countries bar chart, and a scatterplot analyzing relationships between cases, deaths, and population. The project emphasizes data cleaning, transformation, and responsive design to support intuitive exploratory analysis.",
     repo: "https://observablehq.com/@cses478/covid-dashboard"
