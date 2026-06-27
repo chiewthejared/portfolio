@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Jared Chiew — Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Pixel font -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="home.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jared Chiew Portfolio</title>
+    <link rel="stylesheet" href="home.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <main class="home-wrap">
-    <section class="left-panel" aria-live="polite">
-      <div id="typing" class="typing" aria-atomic="true" aria-live="polite">
-        <!-- typed lines will be injected here -->
-      </div>
-    </section>
-
-    <aside class="right-panel">
-      <img src="images/resumephoto.jpg" alt="Jared Chiew photo" id="resumePhoto">
-    </aside>
-  </main>
-
-  <!-- Continue button (hidden until shown by JS) -->
-  <button id="continueBtn" class="continue-btn" aria-hidden="true">CONTINUE ›</button>
-
-  <script src="home.js"></script>
+    <div class="dialogue-scene">
+        <div class="character-box">
+            <div class="dialogue-content">
+                <h2 class="char-name" id="charName"></h2>
+                <p class="char-title" id="charTitle"></p>
+                <div class="char-experience">
+                    <p id="exp1"></p>
+                    <p id="exp2"></p>
+                </div>
+                <p class="char-description" id="charDesc"></p>
+            </div>
+            <button id="continueBtn" class="continue-btn">CONTINUE →</button>
+        </div>
+    </div>
+    <script src="home.js"></script>
 </body>
 </html>
