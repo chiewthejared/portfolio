@@ -1,304 +1,207 @@
-/* ===== FULL menu.css ===== */
-
-:root{
-  --bg:#000000;
-  --panel:#0b1220;
-  --fg:#C7F2E6;
-  --muted:rgba(199,242,230,0.12);
-  --bevel-light: rgba(255,255,255,0.08);
-  --bevel-dark: rgba(0,0,0,0.5);
+:root {
+    --bg: #000;
+    --fg: #fff;
+    --accent: #ff8800;
+    --accent-glow: rgba(255, 136, 0, 0.25);
 }
 
-/* Base */
-*{box-sizing:border-box}
-
-html,body{
-  height:100%;
-  margin:0;
-  background:#000000; /* pure black */
-  font-family:'Press Start 2P',monospace;
-  -webkit-font-smoothing:antialiased;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Center container */
-.menu-wrap{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:40px 20px;
+html,
+body {
+    height: 100%;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    overflow: hidden;
 }
 
-/* Header */
-.menu-header{
-  margin-bottom:40px;
-  text-align:center;
+.menu-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
-.brand{
-  font-size:30px;
-  letter-spacing:1px;
-  color:#ff8800; /* your orange */
-  margin-bottom:8px;
+.menu-left {
+    flex: 0 0 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0a0e14 0%, #000 100%);
+    position: relative;
+    z-index: 2;
+    clip-path: polygon(0% 0%, 100% 0%, 87.5% 100%, 0% 100%);
 }
 
-.hint{
-  font-size:10px;
-  color:#ffffff;
+.menu-right {
+    flex: 0 0 60%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    clip-path: polygon(8.33% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-/* ===== GRID LAYOUT ===== */
-/* 3 columns like your mock */
-.app-grid{
-  display:grid;
-  grid-template-columns: repeat(6, 180px); /* 6 small columns */
-  grid-auto-rows: 230px;
-  gap:28px;
-  justify-content:center;
-  align-items:center;
+.menu-image {
+    width: 100%;
+    height: 100%;
+    background-image: url('images/menu-ghibli.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Each tile spans 2 columns (so width stays 360px) */
-.app{
-  grid-column: span 2;
-  height:230px;
+.menu-right::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
 }
 
-/* ===== TILE STYLE ===== */
-/* Fixed-size tiles so all sections look identical */
-.app{
-  appearance:none;
-  border:0;
-  background:linear-gradient(180deg,var(--panel),#08121c);
-  color:var(--fg);
-
-  /* fixed width comes from grid column; fix the height explicitly */
-  height:230px;          /* <--- enforce identical heights */
-  padding:30px;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-
-  cursor:pointer;
-
-  border-radius:8px;
-  border:4px solid rgba(255,255,255,0.05);
-
-  box-shadow:
-    inset 3px 3px 0 var(--bevel-light),
-    inset -3px -3px 0 var(--bevel-dark),
-    0 18px 40px rgba(0,0,0,0.6);
-
-  transition: transform .12s ease, box-shadow .12s ease;
-  overflow:hidden; /* prevents subtitle from pushing layout out */
+.menu-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 40px;
+    text-transform: uppercase;
 }
 
-/* Hover */
-.app:hover{
-  transform:translateY(-6px);
-  box-shadow:
-    0 26px 50px rgba(0,0,0,0.75),
-    inset 3px 3px 0 rgba(255,255,255,0.06);
+.menu-list {
+    list-style: none;
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-/* Title (KEEP font-family inside as requested) */
-.app .app-title{
-  font-family:'Press Start 2P',monospace;  /* preserved */
-  font-size:22px;
-  letter-spacing:1px;
-  line-height:1.25;
-  word-break:break-word;
-  max-width: 92%;   /* prevents overflow */
-  white-space: normal;
-  margin: 0;
-  padding: 0;
+.menu-list li {
+    width: 100%;
 }
 
-/* Subtitle */
-.app .app-desc{
-  font-size:12px;
-  margin-top:14px;
-  opacity:0.85;
+.menu-list button {
+    width: 100%;
+    padding: 18px 24px;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--fg);
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
+    position: relative;
 }
 
-/* Decorative bevel strips (keeps look) */
-.app::before{
-  content:'';
-  position:absolute;
-  left:10px; top:10px; right:10px;
-  height:8px;
-  background:linear-gradient(90deg,rgba(255,255,255,0.03),transparent);
-  pointer-events:none;
-}
-.app::after{
-  content:'';
-  position:absolute;
-  left:10px; bottom:10px; right:10px;
-  height:8px;
-  background:linear-gradient(90deg,transparent,rgba(0,0,0,0.14));
-  pointer-events:none;
+.menu-list button:hover {
+    transform: scale(1.06);
+    background: rgba(255, 136, 0, 0.10);
+    border-color: var(--accent);
+    box-shadow: 0 0 30px var(--accent-glow);
+    color: #fff;
 }
 
-/* ===== POSITIONING ===== */
-
-/* Top row */
-.app.top-left   { grid-column: 1 / span 2; }  /* columns 1–2 */
-.app.top-center { grid-column: 3 / span 2; }  /* columns 3–4 */
-.app.top-right  { grid-column: 5 / span 2; }  /* columns 5–6 */
-
-/* Bottom row (perfectly centered between top tiles) */
-.app.lower.left  { grid-column: 2 / span 2; } /* between ABOUT & WORK */
-.app.lower.right { grid-column: 4 / span 2; } /* between WORK & PROJECTS */
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width:1200px){
-  .app-grid{
-    grid-template-columns: repeat(2, 320px);
-    grid-auto-rows: 200px;
-  }
-  /* Adapts layout: make the right top tile span both columns if needed */
-  .app.top-right{
-    grid-column:1 / span 2;
-  }
-  .app{ height:200px; }
+.menu-list button:active {
+    transform: scale(0.97);
 }
 
-@media (max-width:700px){
-  .app-grid{
-    grid-template-columns: 1fr;
-    gap:18px;
-  }
-
-  .app{
-    height:180px;
-    padding:22px;
-  }
-
-  .app .app-title{
-    font-size:18px;
-  }
+/* Surprise button standout color */
+#surpriseBtn {
+    color: #ff6b8a;
 }
 
-/* App-open animation: clone expands to cover viewport */
-.app-clone {
-  position: fixed;
-  z-index: 1100;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-  border-radius: 8px;
-  transition: all 480ms cubic-bezier(.2,.8,.2,1);
-  /* keep the same look as tiles initially, but we'll set inline styles */
-  background: linear-gradient(180deg,var(--panel),#08121c);
-  color: var(--fg);
-  border: 4px solid rgba(255,255,255,0.05);
-  box-shadow:
-    inset 3px 3px 0 var(--bevel-light),
-    inset -3px -3px 0 var(--bevel-dark),
-    0 18px 40px rgba(0,0,0,0.6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+#surpriseBtn:hover {
+    color: #ff8aaa;
+    border-color: #ff6b8a;
+    box-shadow: 0 0 30px rgba(255, 107, 138, 0.25);
 }
 
-/* Final full-screen state: black background and no bevel */
-.app-clone--open {
-  left: 0 !important;
-  top: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  padding: 40px !important;
-  border-radius: 0 !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  background: #000 !important;         /* becomes black */
+.menu-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    font-size: 13px;
+    color: #8899aa;
+    letter-spacing: 0.02em;
 }
 
-/* Hide content while expanding for a cleaner wipe — text fades out */
-.app-clone .clone-inner {
-  transition: opacity 220ms linear;
-}
-.app-clone--open .clone-inner {
-  opacity: 0;
-}
-
-/* small safeguard for reduced-motion users */
-@media (prefers-reduced-motion: reduce) {
-  .app-clone { transition: none; }
-  .app-clone .clone-inner { transition: none; }
+/* Hidden state for surprise item */
+.menu-list .surprise-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
 }
 
-/* ===== LOADING SCREEN ===== */
-
-.loading-screen{
-  position:fixed;
-  inset:0;
-  background:#000;
-  color:#fff;
-  z-index:2000;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  font-family:'Press Start 2P',monospace;
-  text-align:center;
+.menu-list .surprise-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
-.loading-title{
-  font-size:18px;
-  margin-bottom:30px;
+@media (max-width: 900px) {
+    .menu-container {
+        flex-direction: column-reverse;
+    }
+
+    .menu-left {
+        flex: 1;
+        clip-path: none;
+        padding: 30px 20px;
+        justify-content: flex-start;
+        padding-top: 40px;
+        background: linear-gradient(180deg, #0a0e14 0%, #000 100%);
+    }
+
+    .menu-right {
+        flex: 0 0 40%;
+        height: 40vh;
+        clip-path: none;
+    }
+
+    .menu-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    .menu-list button {
+        font-size: 16px;
+        padding: 14px 20px;
+    }
+
+    .menu-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: 30px;
+        text-align: center;
+        font-size: 12px;
+    }
 }
 
-.loading-dots span.active{
-  opacity:1;
-}
+@media (max-width: 500px) {
+    .menu-right {
+        flex: 0 0 30%;
+        height: 30vh;
+    }
 
-/* Retro typing dots style */
-
-.loading-dots{
-  font-size:22px;
-  letter-spacing:2px;
-  white-space:nowrap;
-  color:#ffffff;
-}
-
-.loading-dots span{
-  color:#ffffff;
-}
-
-.loading-cursor{
-  animation: blink 0.8s steps(1) infinite;
-}
-
-@keyframes blink{
-  0%{opacity:1;}
-  50%{opacity:0;}
-  100%{opacity:1;}
-}
-
-.menu-footer{
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  text-align: center;
-}
-
-.footer-text{
-  font-size: 10px;      /* matches .hint */
-  color: #ffffff;       /* matches .hint */
-  font-family: 'Press Start 2P', monospace;
+    .menu-list button {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
 }

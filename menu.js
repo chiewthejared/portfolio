@@ -1,105 +1,72 @@
-// menu.js
-// App open animation + loading screen with filling dots
+document.addEventListener("DOMContentLoaded", function() {
+    var surpriseItem = document.getElementById("surpriseItem");
+    var loadingOverlay = null;
+    var progressFill = null;
+    var percentDisplay = null;
+    var animFrameId = null;
 
-(function () {
-  const buttons = Array.from(document.querySelectorAll('.app'));
-  if (!buttons.length) return;
+    function showLoading(target) {
+        loadingOverlay = document.createElement("div");
+        loadingOverlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #fff;
+            transition: opacity 0.4s ease;
+        `;
+        loadingOverlay.innerHTML = `
+            <div style="font-size: 24px; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 30px;">Loading...</div>
+            <div style="width: min(320px, 70%); height: 4px; background: #1e2630; border-radius: 4px; overflow: hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);">
+                <div id="progressFill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #ff8800, #ffaa44); border-radius: 4px; transition: width 0.12s linear; box-shadow: 0 0 12px rgba(255,136,0,0.3);"></div>
+            </div>
+            <div id="percentDisplay" style="font-size: 16px; font-weight: 400; color: #8899aa; margin-top: 18px; font-variant-numeric: tabular-nums; letter-spacing: 0.04em;">0%</div>
+        `;
+        document.body.appendChild(loadingOverlay);
 
-  function getRect(el) {
-    return el.getBoundingClientRect();
-  }
+        progressFill = document.getElementById("progressFill");
+        percentDisplay = document.getElementById("percentDisplay");
 
-  function createCloneFromButton(btn) {
-    const rect = getRect(btn);
+        var startTime = performance.now();
+        var duration = 2000;
 
-    const clone = document.createElement('div');
-    clone.className = 'app-clone';
+        function updateProgress(now) {
+            var elapsed = now - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var percent = Math.round(progress * 100);
+            progressFill.style.width = percent + "%";
+            percentDisplay.textContent = percent + "%";
 
-    clone.style.left = `${rect.left}px`;
-    clone.style.top = `${rect.top}px`;
-    clone.style.width = `${rect.width}px`;
-    clone.style.height = `${rect.height}px`;
-    clone.style.padding = window.getComputedStyle(btn).padding;
-    clone.style.borderRadius = window.getComputedStyle(btn).borderRadius;
+            if (progress < 1) {
+                animFrameId = requestAnimationFrame(updateProgress);
+            } else {
+                setTimeout(function() {
+                    window.location.href = target;
+                }, 300);
+            }
+        }
 
-    const inner = document.createElement('div');
-    inner.className = 'clone-inner';
-    inner.innerHTML = btn.innerHTML;
-
-    clone.appendChild(inner);
-    document.body.appendChild(clone);
-
-    return clone;
-  }
-
-  function showLoadingScreen(target){
-  const loading = document.createElement('div');
-  loading.className = 'loading-screen';
-
-  loading.innerHTML = `
-    <div class="loading-title">LOADING</div>
-    <div class="loading-dots"></div>
-  `;
-
-  document.body.appendChild(loading);
-
-  const dotsContainer = loading.querySelector('.loading-dots');
-
-  const totalDots = 20;   // length of line
-  let current = 0;
-
-  // blinking cursor
-  const cursor = document.createElement('span');
-  cursor.textContent = '█';
-  cursor.className = 'loading-cursor';
-  dotsContainer.appendChild(cursor);
-
-  function typeDot(){
-    if(current < totalDots){
-      const dot = document.createElement('span');
-      dot.textContent = '.';
-      dotsContainer.insertBefore(dot, cursor);
-
-      current++;
-
-      const jitter = Math.random() * 80;
-      setTimeout(typeDot, 60 + jitter);
-    } else {
-      cursor.remove();
-      setTimeout(()=>{
-        window.location.href = target;
-      },300);
+        animFrameId = requestAnimationFrame(updateProgress);
     }
-  }
 
-  typeDot();
-}
+    setTimeout(function() {
+        surpriseItem.classList.add("visible");
+    }, 5000);
 
-  function animateCloneOpen(cloneEl, callback) {
-    cloneEl.getBoundingClientRect();
-
-    requestAnimationFrame(() => {
-      cloneEl.classList.add('app-clone--open');
+    document.querySelectorAll(".menu-list button").forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            var target = btn.getAttribute("data-target");
+            if (target) {
+                if (animFrameId) cancelAnimationFrame(animFrameId);
+                showLoading(target);
+            }
+        });
     });
-
-    setTimeout(callback, 500);
-  }
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.target;
-      if (!target) return;
-
-      const clone = createCloneFromButton(btn);
-      btn.style.visibility = 'hidden';
-
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-
-      animateCloneOpen(clone, () => {
-        showLoadingScreen(target);
-      });
-    });
-  });
-
-})();
+});
