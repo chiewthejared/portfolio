@@ -1,8 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
   const projects = [
     {
+      title: "Portfolio Website",
+      sender: "Jan 2026 - Jun 2026",
+      description: "A personal portfolio website developed using HTML, CSS, and JavaScript to showcase projects, technical skills, and professional experience. The site features responsive design, interactive UI elements, and structured sections for projects, about, and contact information. It is deployed and hosted using GitHub Pages.",
+      image: "images/portfolio.png",
+      repo: "https://github.com/chiewthejared/portfolio"
+    },
+    {
       title: "Resume RAG Chatbot",
-      sender: "Jan 2026",
+      sender: "Jun 2026",
       description: "Designed and developed a Retrieval-Augmented Generation (RAG) chatbot that enables natural language querying of my professional background by indexing multiple resumes (Data Analyst, Data Engineer, Data Science, Software Developer, Software Engineer) and using Google Gemini embeddings to understand content, FAISS for efficient vector retrieval, and LangChain to orchestrate the pipeline – when a user asks a question, the system retrieves the most relevant sections and generates concise, fact‑based answers, all wrapped in a Streamlit UI and deployed on Streamlit Cloud for a seamless, interactive experience.",
       image: "images/rag-chatbot.png",
       repo: "https://github.com/chiewthejared/ragchatbot"
@@ -30,17 +37,10 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     {
       title: "SWF Java App",
-      sender: "Sep 2025",
+      sender: "Sep 2025 -  May 2026",
       description: "An Android application developed in Java using Android Studio, with user interfaces built in XML, designed to help users track and manage seizure-related health information. The app allows users to record the time and details of seizure events, securely store medical and doctor information, visualize seizure patterns through analytics and charts, and manage appointments through an integrated medical calendar. The application follows a structured Android architecture and uses responsive UI components to provide an intuitive interface for monitoring and managing seizure data.",
       image: "images/swf.jpg",
-      repo: "https://github.com/chiewthejared/androidcapstone"
-    },
-    {
-      title: "Portfolio Website",
-      sender: "Aug 2025",
-      description: "A personal portfolio website developed using HTML, CSS, and JavaScript to showcase projects, technical skills, and professional experience. The site features responsive design, interactive UI elements, and structured sections for projects, about, and contact information. It is deployed and hosted using GitHub Pages.",
-      image: "images/portfolio.png",
-      repo: "https://github.com/chiewthejared/portfolio"
+      repo: "https://drive.google.com/file/d/1oYhvGmcEgGFY7hR3xtdvG7oPSgpbHZFH/view"
     }
   ];
 
