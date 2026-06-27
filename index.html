@@ -4,29 +4,31 @@
     <meta charset="UTF-8" />
     <title>Jared Chiew Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Pixel Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
-    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
     <!-- Intro Screen -->
     <div id="intro" class="screen">
-        <h1>JARED CHIEW PRESENTS</h1>
+        <h1 class="intro-title">JARED CHIEW PRESENTS</h1>
     </div>
 
-    <!-- Main Screen -->
+    <!-- Loading Screen -->
+    <div id="loading" class="screen">
+        <p class="loading-text">Loading...</p>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="loading-percent" id="loadingPercent">0%</p>
+    </div>
+
+    <!-- Launch Game Screen -->
     <div id="main" class="screen" aria-hidden="true">
         <h1 class="portfolio-title">PORTFOLIO</h1>
+        <p class="subtitle">Created by Jared Chiew</p>
 
-        <!-- Enter button (blinks) -->
-        <button id="enterBtn" class="enter-btn" aria-label="Enter Portfolio">ENTER</button>
-
-        <!-- Press any key prompt -->
-        <div id="pressAny" class="press-any" aria-hidden="true">PRESS ANY KEY</div>
+        <button id="launchBtn" class="launch-btn">LAUNCH GAME</button>
     </div>
 
     <!-- JS -->

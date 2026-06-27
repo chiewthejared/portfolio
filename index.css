@@ -1,41 +1,50 @@
-/* index.css - full file */
-
-/* Root colors */
 :root {
     --bg: #000;
     --fg: #fff;
+    --accent: #ff8800;
+    --accent-glow: rgba(255, 136, 0, 0.3);
+    --track-bg: #1e2630;
+    --radius: 6px;
+    --transition-speed: 0.7s;
 }
 
-/* Basic reset & layout */
-html, body {
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
+
 body {
-    margin: 0;
     background-color: var(--bg);
     color: var(--fg);
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     height: 100vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Screens container */
 .screen {
     position: absolute;
     opacity: 0;
-    transition: opacity 0.9s ease;
+    transition: opacity var(--transition-speed) ease;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    padding: 24px;
 }
 
 .screen.visible {
@@ -43,79 +52,107 @@ body {
     pointer-events: auto;
 }
 
-h1 {
-    font-size: 30px;
-    margin: 0 0 30px 0;
-    letter-spacing: 4px;
-}
-
-/* Enter Button (pixelated, blinking) */
-.enter-btn {
-    padding: 12px 28px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
-    background: transparent;
+.intro-title {
+    font-size: clamp(20px, 5vw, 40px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
     color: var(--fg);
-    border: 3px solid var(--fg);
-    cursor: pointer;
-    outline: none;
-    user-select: none;
-    box-shadow: none;
-    margin-top: 4px;
-    transform: translateZ(0);
+    margin: 0;
 }
 
-/* Press any key prompt (blinking, smaller) */
-.press-any {
+.loading-text {
+    font-size: clamp(14px, 3vw, 24px);
+    font-weight: 400;
+    color: var(--fg);
+    margin-bottom: 28px;
+    letter-spacing: 0.1em;
+}
+
+.progress-track {
+    width: min(320px, 70%);
+    height: 4px;
+    background-color: var(--track-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), #ffaa44);
+    border-radius: 4px;
+    transition: width 0.12s linear;
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.loading-percent {
+    font-size: clamp(10px, 1.5vw, 14px);
+    font-weight: 400;
+    color: var(--fg);
     margin-top: 18px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.9;
-    user-select: none;
-}
-
-/* blink animation for the button and press-any (synchronized) */
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.15; }
-}
-
-/* use identical animation settings for both to keep them in sync */
-.enter-btn.blink,
-.press-any.blink {
-    animation: blink 1s steps(1, end) infinite;
-}
-
-/* Hover invert effect (works after user interaction) */
-.enter-btn:hover {
-    background: var(--fg);
-    color: var(--bg);
-}
-
-/* Focus ring for keyboard users */
-.enter-btn:focus {
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
-}
-
-/* small-screen adjustment */
-@media (max-width: 480px) {
-    h1 { font-size: 16px; }
-    .enter-btn { padding: 10px 20px; font-size: 10px; }
-}
-
-/* ---------- Home page styling is often in home.css, but if you kept some styles here
-   you can add or adjust them. This file is specifically for the index screen visuals. */
-
-/* Optional: keep a subtle selection color */
-::selection {
-    background: rgba(255,255,255,0.08);
-}
-
-/* Make sure images are pixelated when scaled (if needed anywhere) */
-img {
-    image-rendering: pixelated;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
 }
 
 .portfolio-title {
-    color: #ff8800;
+    font-size: clamp(28px, 6vw, 50px);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--fg);
+    margin: 0 0 4px 0;
+}
+
+.subtitle {
+    font-size: clamp(10px, 1.2vw, 16px);
+    font-weight: 400;
+    color: var(--fg);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 40px 0;
+}
+
+.launch-btn {
+    padding: 16px 44px;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(12px, 1.2vw, 18px);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.2s ease;
+    box-shadow: 0 4px 20px rgba(255, 136, 0, 0.25);
+}
+
+.launch-btn:hover {
+    transform: scale(1.04);
+    background: #ffaa33;
+    box-shadow: 0 8px 32px rgba(255, 136, 0, 0.45);
+}
+
+.launch-btn:active {
+    transform: scale(0.96);
+}
+
+.launch-btn:focus-visible {
+    box-shadow: 0 0 0 4px rgba(255, 136, 0, 0.5);
+}
+
+::selection {
+    background: rgba(255, 136, 0, 0.25);
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+    .progress-track {
+        width: 80%;
+    }
+    .launch-btn {
+        padding: 14px 28px;
+    }
 }
