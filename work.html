@@ -8,20 +8,6 @@
   <link rel="stylesheet" href="work.css" />
 </head>
 <body>
-  <!-- Boot Screen -->
-  <div id="bootScreen" class="boot-screen">
-    <div class="boot-content">
-      <div class="boot-text">
-        <div class="boot-line">SYSTEM INITIALIZING...</div>
-        <div class="boot-line">MEMORY CHECK: OK</div>
-        <div class="boot-line">DISPLAY DRIVER: LOADED</div>
-        <div class="boot-line blink-cursor">READY</div>
-      </div>
-      <div class="boot-progress">
-        <div class="boot-progress-bar" id="bootProgress"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- Computer Monitor -->
   <div class="monitor-container">
@@ -30,6 +16,23 @@
       <div class="bezel">
         <!-- Screen -->
         <div class="screen">
+          
+          <!-- Boot Screen (inside monitor) -->
+          <div id="bootScreen" class="boot-screen">
+            <div class="boot-content">
+              <div class="boot-text">
+                <div class="boot-line">SYSTEM INITIALIZING...</div>
+                <div class="boot-line">MEMORY CHECK: OK</div>
+                <div class="boot-line">DISPLAY DRIVER: LOADED</div>
+                <div class="boot-line blink-cursor">READY</div>
+              </div>
+              <div class="boot-progress">
+                <div class="boot-progress-bar" id="bootProgress"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop (hidden behind boot screen) -->
           <div class="desktop">
             <!-- Only one app: Work Log -->
             <div class="app-icon" id="workLogApp">

@@ -23,17 +23,82 @@ body {
   overflow: hidden;
 }
 
-/* Boot Screen */
+/* Monitor Container */
+.monitor-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('images/graduation-ghibli.png') center/cover no-repeat;
+  padding: 12px;
+  position: relative;
+}
+
+.monitor-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 0;
+}
+
+/* Monitor */
+.monitor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Bezel - Grey */
+.bezel {
+  background: #3a3a3a;
+  padding: 12px 16px;
+  border-radius: 16px 16px 0 0;
+  border: 1px solid #4a4a4a;
+  border-bottom: none;
+  box-shadow: 
+    0 30px 80px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  width: 100%;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen - 21:9 ultrawide aspect ratio */
+.screen {
+  background: var(--screen-bg);
+  aspect-ratio: 21/9;
+  width: 100%;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+  flex: 1;
+}
+
+/* Boot Screen - inside monitor */
 .boot-screen {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: #000;
-  z-index: 1000;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   transition: opacity 0.8s ease;
+  border-radius: 8px;
 }
 
 .boot-screen.hidden {
@@ -98,76 +163,6 @@ body {
   transition: width 0.3s linear;
   border-radius: 2px;
   box-shadow: 0 0 20px rgba(51, 255, 51, 0.2);
-}
-
-/* Monitor Container */
-.monitor-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: url('images/graduation-ghibli.png') center/cover no-repeat;
-  padding: 12px;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  position: relative;
-}
-
-.monitor-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 0;
-}
-
-.monitor-container.visible {
-  opacity: 1;
-}
-
-/* Monitor */
-.monitor {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  max-height: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-/* Bezel - Grey */
-.bezel {
-  background: #3a3a3a;
-  padding: 12px 16px;
-  border-radius: 16px 16px 0 0;
-  border: 1px solid #4a4a4a;
-  border-bottom: none;
-  box-shadow: 
-    0 30px 80px rgba(0,0,0,0.9),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  width: 100%;
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Screen - 21:9 ultrawide aspect ratio */
-.screen {
-  background: var(--screen-bg);
-  aspect-ratio: 21/9;
-  width: 100%;
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
-  flex: 1;
 }
 
 /* Desktop */
@@ -275,6 +270,7 @@ body {
   position: relative;
   gap: 8px;
   cursor: pointer;
+  z-index: 2;
 }
 
 .app-icon:hover {

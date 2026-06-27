@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   const bootScreen = document.getElementById("bootScreen");
   const bootProgress = document.getElementById("bootProgress");
-  const monitorContainer = document.querySelector(".monitor-container");
   const workLogApp = document.getElementById("workLogApp");
   const appWindow = document.getElementById("appWindow");
   const closeWindow = document.getElementById("closeWindow");
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   ];
 
-  // Convert URLs in text to clickable links
   function linkifyText(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let progress = 0;
   const bootDuration = 4000;
-
   const startTime = Date.now();
 
   function updateBoot() {
@@ -48,33 +45,28 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
       setTimeout(function() {
         bootScreen.classList.add("hidden");
-        monitorContainer.classList.add("visible");
       }, 400);
     }
   }
 
   updateBoot();
 
-  // Open app window
   workLogApp.addEventListener("click", function() {
     appWindow.classList.add("open");
     noteListView.classList.remove("hidden");
     noteDetail.classList.remove("open");
   });
 
-  // Close app window
   closeWindow.addEventListener("click", function() {
     appWindow.classList.remove("open");
   });
 
-  // Open note detail
   document.querySelectorAll(".note-item").forEach(function(item) {
     item.addEventListener("click", function() {
       const index = parseInt(this.dataset.note);
       const note = notes[index];
       noteDetailTitle.textContent = note.title;
       
-      // Build the note body with image at the end
       let bodyHtml = linkifyText(note.body);
       if (note.image) {
         bodyHtml += `<br><br><img src="${note.image}" alt="${note.title}" style="width: 100%; max-width: 600px; border-radius: 8px; margin-top: 8px; border: 1px solid #333;">`;
@@ -86,13 +78,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // Back to notes list
   backToNotes.addEventListener("click", function() {
     noteDetail.classList.remove("open");
     noteListView.classList.remove("hidden");
   });
 
-  // Power button - navigate to menu
   powerBtn.addEventListener("click", function() {
     document.body.style.transition = "opacity 0.5s ease";
     document.body.style.opacity = "0";
@@ -100,19 +90,4 @@ document.addEventListener("DOMContentLoaded", function() {
       window.location.href = "menu.html";
     }, 550);
   });
-
-  // Ensure monitor is hidden initially
-  monitorContainer.style.opacity = "0";
-
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.target.classList.contains("hidden")) {
-        setTimeout(function() {
-          monitorContainer.style.opacity = "1";
-        }, 100);
-      }
-    });
-  });
-
-  observer.observe(bootScreen, { attributes: true, attributeFilter: ["class"] });
 });
