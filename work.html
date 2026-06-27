@@ -3,51 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Work — Journal</title>
-
-  <!-- Same font as home -->
+  <title>Jared Chiew Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="work.css" />
 </head>
 <body>
-  <main class="page">
+  <!-- Boot Screen -->
+  <div id="bootScreen" class="boot-screen">
+    <div class="boot-content">
+      <div class="boot-text">
+        <div class="boot-line">SYSTEM INITIALIZING...</div>
+        <div class="boot-line">MEMORY CHECK: OK</div>
+        <div class="boot-line">DISPLAY DRIVER: LOADED</div>
+        <div class="boot-line blink-cursor">READY</div>
+      </div>
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="bootProgress"></div>
+      </div>
+    </div>
+  </div>
 
-    <header class="topbar">
-      <h1 class="title">WORK.LOG</h1>
-    </header>
-
-    <section class="container">
-
-      <aside class="log-list">
-        <ul id="logs"></ul>
-      </aside>
-
-      <article class="log-view">
-
-        <div class="placeholder" id="placeholder">
-          &gt; Select log entry_
-        </div>
-
-        <div class="entry" id="entryContent" hidden>
-          <div class="entry-header">
-            <div class="entry-title" id="entryTitle"></div>
-            <div class="entry-meta" id="entryMeta"></div>
+  <!-- Computer Monitor -->
+  <div class="monitor-container">
+    <div class="monitor">
+      <!-- Monitor Bezel -->
+      <div class="bezel">
+        <!-- Screen -->
+        <div class="screen">
+          <div class="desktop">
+            <!-- Only one app: Work Log -->
+            <div class="app-icon" id="workLogApp">
+              <div class="app-icon-inner">
+                <span class="app-icon-text">📋</span>
+                <span class="app-icon-label">Work Log</span>
+              </div>
+            </div>
           </div>
-
-          <pre class="entry-body" id="entryBody"></pre>
-
-          <button id="backButton" class="btn">← BACK</button>
         </div>
-
-      </article>
-
-    </section>
-
-  </main>
-
-  <!-- CONTINUE BUTTON (same as your Projects page) -->
-  <button id="continueBtn" class="continue-btn">CONTINUE ›</button>
+      </div>
+      <!-- Monitor Stand -->
+      <div class="stand"></div>
+      <div class="base"></div>
+    </div>
+  </div>
 
   <script src="work.js"></script>
 </body>

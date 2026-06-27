@@ -1,174 +1,319 @@
-:root{
-  --bg:#000;
-  --fg:#fff;
-  --muted:rgba(255,255,255,0.15);
-  --accent:#FFC627;
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --accent: #ff8800;
+  --screen-bg: #0a0e14;
+  --bezel-color: #1a1a1a;
 }
 
-*{box-sizing:border-box}
-
-html,body{
-  height:100%;
-  margin:0;
-  background:var(--bg);
-  color:var(--fg);
-  font-family:'Press Start 2P', cursive;
-  -webkit-font-smoothing:antialiased;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.page{
-  padding:40px;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  gap:40px;
-}
-
-/* Title */
-.title{
-  font-size:20px;
-  letter-spacing:2px;
-}
-
-/* Layout */
-.container{
-  display:grid;
-  grid-template-columns:300px 1fr;
-  gap:40px;
-}
-
-/* Log List */
-.log-list ul{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-
-.log-item{
-  padding:16px;
-  margin-bottom:20px;
-  cursor:pointer;
-  border:2px solid var(--fg);
-  transition:all 0.2s ease;
-}
-
-.log-item:hover{
-  background:var(--fg);
-  color:var(--bg);
-}
-
-.log-title{
-  font-size:18px;
-  margin-bottom:8px;
-}
-
-.log-time{
-  font-size:12px;
-  opacity:0.6;
-}
-
-/* Right panel */
-.log-view{
-  min-height:300px;
-}
-
-.placeholder{
-  font-size:12px;
-  opacity:0.6;
-}
-
-/* Entry */
-.entry-title{
-  font-size:18px;
-  margin-bottom:10px;
-  color: #ff8800;
-}
-
-.entry-meta{
-  font-size:12px;
-  opacity:0.6;
-  margin-bottom:20px;
-}
-
-.entry-body{
-  font-size:12px;
-  line-height:1.8;
-  white-space:pre-wrap;
-  min-height:200px;
-  font-family: 'Press Start 2P', cursive;
-}
-
-/* Caret */
-.caret{
-  display:inline-block;
-  width:10px;
-  height:16px;
-  background:var(--fg);
-  margin-left:6px;
-  animation:blink 0.9s steps(1) infinite;
-}
-
-@keyframes blink{
-  0%{opacity:1;}
-  50%{opacity:0;}
-  100%{opacity:1;}
-}
-
-/* Back button */
-.btn{
-  margin-top:20px;
-  font-size:12px;
-  background:transparent;
-  border:2px solid var(--fg);
-  color:var(--fg);
-  padding:10px 14px;
-  cursor:pointer;
-  font-family: 'Press Start 2P', cursive;
-}
-
-.btn:hover{
-  background:var(--fg);
-  color:var(--bg);
-}
-
-/* CONTINUE BUTTON — copied/adapted from projects.css so it's identical */
-.continue-btn {
-  position: fixed;
-  right: 28px;
-  bottom: 28px;
-  padding: 12px 18px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 11px;
-  color: var(--bg);
-  background: var(--fg);
-  border: 3px solid var(--fg);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 60;
-}
-
-.continue-btn:hover,
-.continue-btn:focus {
-  background: transparent;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
   color: var(--fg);
-  border-color: var(--accent);
-  outline: none;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28"><polygon points="2,2 20,2 22,4 22,22 20,24 4,24 2,22 2,4" fill="%23ffffff" stroke="%23000000" stroke-width="1"/><polygon points="4,4 20,4 20,22 4,22 4,4" fill="%23ffffff"/><line x1="8" y1="8" x2="16" y2="8" stroke="%23000000" stroke-width="1.5"/><line x1="8" y1="12" x2="16" y2="12" stroke="%23000000" stroke-width="1.5"/><line x1="8" y1="16" x2="12" y2="16" stroke="%23000000" stroke-width="1.5"/></svg>') 2 2, auto;
+}
+
+/* Boot Screen */
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease;
+}
+
+.boot-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.boot-content {
+  max-width: 600px;
+  width: 80%;
+  padding: 40px;
+}
+
+.boot-text {
+  color: #33ff33;
+  font-size: 14px;
+  line-height: 2;
+  margin-bottom: 30px;
+  font-family: 'Inter', monospace;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.boot-line {
+  opacity: 0;
+  animation: bootTyping 0.5s forwards;
+}
+
+.boot-line:nth-child(1) { animation-delay: 0.2s; }
+.boot-line:nth-child(2) { animation-delay: 0.9s; }
+.boot-line:nth-child(3) { animation-delay: 1.6s; }
+.boot-line:nth-child(4) { animation-delay: 2.3s; }
+
+@keyframes bootTyping {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.blink-cursor::after {
+  content: '█';
+  animation: blink 0.8s steps(1) infinite;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.boot-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(51, 255, 51, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.boot-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #33ff33;
+  transition: width 0.3s linear;
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(51, 255, 51, 0.2);
+}
+
+/* Monitor Container */
+.monitor-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.monitor-container.visible {
+  opacity: 1;
+}
+
+/* Monitor */
+.monitor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+/* Bezel - Modern slim design */
+.bezel {
+  background: #1a1c20;
+  padding: 12px 16px;
+  border-radius: 16px 16px 0 0;
+  border: 1px solid #2a2c30;
+  border-bottom: none;
+  box-shadow: 
+    0 30px 80px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  width: 100%;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen - 21:9 ultrawide aspect ratio */
+.screen {
+  background: var(--screen-bg);
+  aspect-ratio: 21/9;
+  width: 100%;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+  flex: 1;
+}
+
+/* Desktop */
+.desktop {
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: radial-gradient(ellipse at center, #141a24 0%, #080b10 100%);
+  position: relative;
+}
+
+/* Desktop Title */
+.desktop-title {
+  color: rgba(255,255,255,0.04);
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 20px;
+  right: 28px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+/* App Icon - Modern */
+.app-icon {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 28 32"><polygon points="4,4 24,4 24,24 20,28 8,28 4,24 4,4" fill="%23ff8800" stroke="%23ffffff" stroke-width="1.5"/><polygon points="6,6 22,6 22,22 18,26 10,26 6,22 6,6" fill="%231a1a1a"/><text x="14" y="20" font-family="monospace" font-size="14" fill="%23ffffff" text-anchor="middle" font-weight="bold">↗</text></svg>') 4 4, pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.app-icon:hover {
+  transform: scale(1.06);
+}
+
+.app-icon-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.app-icon:hover .app-icon-inner {
+  background: rgba(255,136,0,0.06);
+  border-color: rgba(255,136,0,0.2);
+  box-shadow: 0 0 40px rgba(255,136,0,0.04);
+}
+
+.app-icon-text {
+  font-size: 44px;
+  line-height: 1;
+}
+
+.app-icon-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* Stand - Modern slim */
+.stand {
+  width: 20%;
+  height: 30px;
+  background: #1a1c20;
+  border: 1px solid #2a2c30;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+
+.base {
+  width: 35%;
+  height: 10px;
+  background: #1a1c20;
+  border: 1px solid #2a2c30;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
 }
 
 /* Responsive */
-@media (max-width:900px){
-  .container{
-    grid-template-columns:1fr;
+@media (max-width: 768px) {
+  .bezel {
+    padding: 8px 10px;
+    border-radius: 12px 12px 0 0;
+  }
+  .boot-text {
+    font-size: 11px;
+  }
+  .app-icon {
+    width: 100px;
+    height: 100px;
+  }
+  .app-icon-text {
+    font-size: 32px;
+  }
+  .app-icon-label {
+    font-size: 10px;
+  }
+  .desktop {
+    padding: 24px;
+  }
+  .monitor-container {
+    padding: 8px;
+  }
+  .screen {
+    border-radius: 6px;
+  }
+  .stand {
+    height: 20px;
+  }
+  .base {
+    height: 8px;
   }
 }
 
-/* Clickable repo links (same style as socials) */
-.terminal-link{
-  text-decoration:none;
-  color:var(--fg);
-  transition:opacity 0.2s ease;
-}
-
-.terminal-link:hover{
-  opacity:0.6;
+@media (max-width: 480px) {
+  .app-icon {
+    width: 80px;
+    height: 80px;
+  }
+  .app-icon-text {
+    font-size: 26px;
+  }
+  .app-icon-label {
+    font-size: 8px;
+  }
+  .desktop {
+    padding: 16px;
+  }
+  .bezel {
+    padding: 6px 8px;
+  }
+  .stand {
+    height: 16px;
+  }
+  .base {
+    height: 6px;
+  }
 }
