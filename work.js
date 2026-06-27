@@ -3,11 +3,39 @@ document.addEventListener("DOMContentLoaded", function() {
   const bootProgress = document.getElementById("bootProgress");
   const monitorContainer = document.querySelector(".monitor-container");
   const workLogApp = document.getElementById("workLogApp");
+  const appWindow = document.getElementById("appWindow");
+  const closeWindow = document.getElementById("closeWindow");
+  const noteListView = document.getElementById("noteListView");
+  const noteDetail = document.getElementById("noteDetail");
+  const noteDetailTitle = document.getElementById("noteDetailTitle");
+  const noteDetailBody = document.getElementById("noteDetailBody");
+  const backToNotes = document.getElementById("backToNotes");
+  const powerBtn = document.getElementById("powerBtn");
+
+  const notes = [
+    {
+      title: "Sturge-Weber Foundation",
+      body: `ROLE: Software Engineer\n\n- Engineered a native iOS version of an existing Android medical application using Xcode and Swift, ensuring full feature parity for pediatric neurology care.\n- Refactored and enhanced the original Android application using Android Studio (Java/XML), integrating new features and UI overhauls to achieve production-grade readiness.\n- Advanced the app into rigorous testing phases using GitHub CI pipelines and JUnit, which cleared beta testing and positioned the product for public launch\n\nLink to App Demo:\nhttps://drive.google.com/file/d/1oYhvGmcEgGFY7hR3xtdvG7oPSgpbHZFH/view`,
+      image: 'images/swf-event.png'
+    },
+    {
+      title: "Cloud Space Co",
+      body: `ROLE: Data Engineer Intern\n\n- Built and maintained ETL workflows and SQL queries in BigQuery on Google Cloud Platform, using Bash scripts and GitHub for version control, which streamlined data pipelines and enabled timely analytics reporting \n- Developed a proof-of-concept AI chatbot with Vertex AI and AgentSpace, integrating it into client demo environments, which showcased automation capabilities and secured interest for further development\n- Assisted in organizing and transforming client datasets using SQL and Bash scripts on Google Cloud Platform, preparing them for cloud analytics and reporting systems, which improved data readiness for downstream analysis\n\nChatbot Link:\nhttps://github.com/chiewthejared/cloudspace/blob/main/chatbot.py`,
+      image: 'images/cloudspace.jpg'
+    }
+  ];
+
+  // Convert URLs in text to clickable links
+  function linkifyText(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #ff8800; text-decoration: underline; word-break: break-all;">${url}</a>`;
+    });
+  }
 
   let progress = 0;
-  const bootDuration = 4000; // 4 seconds total boot time
+  const bootDuration = 4000;
 
-  // Animate boot progress bar
   const startTime = Date.now();
 
   function updateBoot() {
@@ -18,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (progress < 1) {
       requestAnimationFrame(updateBoot);
     } else {
-      // Boot complete - fade out boot screen, show monitor
       setTimeout(function() {
         bootScreen.classList.add("hidden");
         monitorContainer.classList.add("visible");
@@ -28,25 +55,58 @@ document.addEventListener("DOMContentLoaded", function() {
 
   updateBoot();
 
-  // Click on Work Log app
+  // Open app window
   workLogApp.addEventListener("click", function() {
-    // For now, just a simple feedback
-    this.style.transform = "scale(0.95)";
-    setTimeout(() => {
-      this.style.transform = "";
-    }, 200);
-    // We'll add the actual app functionality in the next prompt
-    console.log("Work Log app clicked!");
+    appWindow.classList.add("open");
+    noteListView.classList.remove("hidden");
+    noteDetail.classList.remove("open");
+  });
+
+  // Close app window
+  closeWindow.addEventListener("click", function() {
+    appWindow.classList.remove("open");
+  });
+
+  // Open note detail
+  document.querySelectorAll(".note-item").forEach(function(item) {
+    item.addEventListener("click", function() {
+      const index = parseInt(this.dataset.note);
+      const note = notes[index];
+      noteDetailTitle.textContent = note.title;
+      
+      // Build the note body with image at the end
+      let bodyHtml = linkifyText(note.body);
+      if (note.image) {
+        bodyHtml += `<br><br><img src="${note.image}" alt="${note.title}" style="width: 100%; max-width: 600px; border-radius: 8px; margin-top: 8px; border: 1px solid #333;">`;
+      }
+      noteDetailBody.innerHTML = bodyHtml;
+      
+      noteListView.classList.add("hidden");
+      noteDetail.classList.add("open");
+    });
+  });
+
+  // Back to notes list
+  backToNotes.addEventListener("click", function() {
+    noteDetail.classList.remove("open");
+    noteListView.classList.remove("hidden");
+  });
+
+  // Power button - navigate to menu
+  powerBtn.addEventListener("click", function() {
+    document.body.style.transition = "opacity 0.5s ease";
+    document.body.style.opacity = "0";
+    setTimeout(function() {
+      window.location.href = "menu.html";
+    }, 550);
   });
 
   // Ensure monitor is hidden initially
   monitorContainer.style.opacity = "0";
 
-  // After boot, show monitor with transition
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.target.classList.contains("hidden")) {
-        // Boot screen hidden - show monitor
         setTimeout(function() {
           monitorContainer.style.opacity = "1";
         }, 100);

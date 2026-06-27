@@ -34,8 +34,44 @@
             <!-- Only one app: Work Log -->
             <div class="app-icon" id="workLogApp">
               <div class="app-icon-inner">
-                <span class="app-icon-text">📋</span>
+                <img src="images/work-app-icon.png" alt="Work Log" class="app-icon-image" />
                 <span class="app-icon-label">Work Log</span>
+              </div>
+            </div>
+
+            <!-- Power Off Button -->
+            <button class="power-btn" id="powerBtn">
+              <span class="power-icon">⏻</span>
+              <span class="power-tooltip">Return to Menu</span>
+            </button>
+
+            <!-- App Window -->
+            <div class="app-window" id="appWindow">
+              <div class="window-header">
+                <span class="window-title">📝 Work Log</span>
+                <button class="window-close" id="closeWindow">✕</button>
+              </div>
+              <div class="window-body">
+                <!-- Note List View -->
+                <div class="note-list-view" id="noteListView">
+                  <div class="note-item" data-note="0">
+                    <div class="note-title">🏢 Sturge-Weber Foundation</div>
+                    <div class="note-preview">Software Engineer · Sep 2025 - May 2026</div>
+                  </div>
+                  <div class="note-item" data-note="1">
+                    <div class="note-title">☁️ Cloud Space Co</div>
+                    <div class="note-preview">Data Engineer Intern · June 2025 - Aug 2025</div>
+                  </div>
+                </div>
+
+                <!-- Note Detail View -->
+                <div class="note-detail" id="noteDetail">
+                  <div class="note-detail-header">
+                    <button class="note-detail-back" id="backToNotes">◀</button>
+                    <span class="note-detail-title" id="noteDetailTitle"></span>
+                  </div>
+                  <div class="note-detail-body" id="noteDetailBody"></div>
+                </div>
               </div>
             </div>
           </div>
