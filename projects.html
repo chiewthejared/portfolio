@@ -5,50 +5,60 @@
   <title>Jared Chiew — Projects</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="projects.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="projects.css" />
 </head>
 <body>
 
-  <main class="projects-wrap">
+  <!-- Tablet Container -->
+  <div class="tablet-container">
+    <div class="tablet">
+      <!-- Tablet Bezel -->
+      <div class="tablet-bezel">
+        <!-- Screen -->
+        <div class="tablet-screen">
+          <div class="tablet-desktop">
+            <!-- Status Bar -->
+            <div class="status-bar">
+              <span class="status-time">9:41</span>
+              <span class="status-icons">📶 🔋</span>
+            </div>
 
-    <!-- LEFT: same structure & spacing as socials -->
-    <section class="left-col">
-      <h1 class="terminal-title">
-        PROJECTS
-      </h1>
+            <!-- Email App -->
+            <div class="email-app">
+              <!-- App Header -->
+              <div class="app-header">
+                <span class="app-title">📧 Projects</span>
+                <button class="app-close" id="closeBtn">✕</button>
+              </div>
 
-      <nav class="terminal-list" id="projectsList">
-        <!-- JS will populate the 5 project items here to match socials link styling -->
-      </nav>
+              <!-- Email Layout: Sidebar + Content -->
+              <div class="email-layout">
+                <!-- Email List (Left) -->
+                <div class="email-list" id="emailList">
+                  <!-- JS will populate emails here -->
+                </div>
 
-      <!-- keep the same caret as socials -->
-      <span class="caret" id="leftCaret"></span>
-    </section>
-
-    <aside class="right-col">
-  <div class="preview-box" id="previewBox">
-    <div class="img-wrap">
-      <img id="projectImage" src="images/project1.jpg" alt="project image">
+                <!-- Email Content (Right) -->
+                <div class="email-content" id="emailContent">
+                  <div class="email-placeholder" id="placeholder">
+                    <span>Select a project to view</span>
+                  </div>
+                  <div class="email-detail" id="emailDetail" style="display: none;">
+                    <div class="email-header">
+                      <h2 class="email-subject" id="emailSubject"></h2>
+                      <span class="email-sender" id="emailSender"></span>
+                    </div>
+                    <div class="email-body" id="emailBody"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <h2 id="projectTitle">Portfolio Website</h2>
-    <p id="projectDescription">
-      A retro-styled personal portfolio built with HTML, CSS, and JavaScript. Features animated typing effects, dynamic sections, and custom UI transitions.
-    </p>
-
-    <!-- GitHub repo button (populated/hidden by JS) -->
-    <a id="repoBtn" class="repo-btn" href="#" target="_blank" rel="noopener noreferrer">View Project</a>
   </div>
-</aside>
-
-  </main>
-
-  <button id="continueBtn" class="continue-btn">
-    CONTINUE ›
-  </button>
 
   <script src="projects.js"></script>
 </body>
