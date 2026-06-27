@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
       bodyHtml += `<br><br><img src="${p.image}" alt="${p.title}" style="width: 100%; max-width: 600px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">`;
     }
     if (p.repo) {
-      bodyHtml += `<br><br><a href="${p.repo}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 8px 16px; background: var(--accent); color: #000; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px;">View Project →</a>`;
+      bodyHtml += `<br><br><a href="${p.repo}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 8px 16px; background: var(--accent); color: #000; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px; margin-bottom: 8px;">View Project</a>`;
     }
     emailBody.innerHTML = bodyHtml;
   }
