@@ -44,22 +44,60 @@ body {
   z-index: 0;
 }
 
+/* Phone Wrapper */
+.phone-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chalk Annotation - Left side, pointing right */
+.chalk-annotation {
+  position: absolute;
+  left: calc(100% + 30px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.chalk-text {
+  font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+  font-size: 22px;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  margin-left: 10px;
+}
+
+.chalk-arrow {
+  width: 120px;
+  height: 60px;
+  margin-left: 0;
+}
+
 /* Phone */
 .phone {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  z-index: 1;
   width: 100%;
-  max-width: 380px;
+  max-width: 520px;
 }
 
 /* Phone Bezel */
 .phone-bezel {
   background: var(--phone-bezel);
-  padding: 16px;
-  border-radius: 40px;
+  padding: 20px;
+  border-radius: 50px;
   border: 2px solid #2a2a2a;
   box-shadow: 
     0 30px 80px rgba(0,0,0,0.9),
@@ -71,13 +109,13 @@ body {
 /* Notch */
 .notch {
   position: absolute;
-  top: 8px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 26px;
+  width: 140px;
+  height: 30px;
   background: #000;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 18px 18px;
   z-index: 5;
 }
 
@@ -86,7 +124,7 @@ body {
   background: #0a0e14;
   aspect-ratio: 9/19.5;
   width: 100%;
-  border-radius: 28px;
+  border-radius: 34px;
   position: relative;
   overflow: hidden;
   box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
@@ -96,10 +134,10 @@ body {
 .phone-desktop {
   width: 100%;
   height: 100%;
-  padding: 40px 16px 20px;
+  padding: 50px 20px 24px;
   display: flex;
   flex-direction: column;
-  background: url('images/phone-background.jpg') center/cover no-repeat;
+  background: url('images/phone-background.png') center/cover no-repeat;
   position: relative;
 }
 
@@ -118,8 +156,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4px 16px 4px;
-  font-size: 12px;
+  padding: 0 4px 20px 4px;
+  font-size: 14px;
   font-weight: 600;
   color: rgba(255,255,255,0.9);
   position: relative;
@@ -132,7 +170,7 @@ body {
 }
 
 .status-icons {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 2px;
 }
 
@@ -140,8 +178,8 @@ body {
 .app-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px 30px;
-  padding: 20px 10px;
+  gap: 28px 48px;
+  padding: 24px 12px;
   position: relative;
   z-index: 1;
   flex: 1;
@@ -154,11 +192,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  padding: 8px 0;
+  padding: 10px 0;
   border-radius: 12px;
 }
 
@@ -171,16 +209,16 @@ body {
 }
 
 .app-icon-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
   object-fit: contain;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   background: rgba(255,255,255,0.05);
 }
 
 .app-label {
-  font-size: 10px;
+  font-size: 14px;
   color: rgba(255,255,255,0.9);
   text-align: center;
   font-weight: 400;
@@ -193,139 +231,162 @@ body {
 .home-indicator {
   position: relative;
   z-index: 1;
-  width: 120px;
+  width: 140px;
   height: 5px;
   background: rgba(255,255,255,0.3);
   border-radius: 3px;
   margin: 0 auto 4px;
 }
 
-/* Power Button */
-.power-btn {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  background: rgba(255,255,255,0.08);
-  border: 1.5px solid rgba(255,255,255,0.15);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Physical Power Button on Phone - Right Side */
+.phone-power-btn {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 60px;
+  background: #2a2a2a;
+  border: 1px solid #333;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: rgba(255,255,255,0.5);
-  font-size: 20px;
-  z-index: 100;
-  backdrop-filter: blur(4px);
+  z-index: 20;
 }
 
-.power-btn:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.4);
-  color: #ff4444;
-  transform: scale(1.12);
-  box-shadow: 0 0 20px rgba(255,68,68,0.2);
+.phone-power-btn:hover {
+  background: #3a3a3a;
+  transform: translateY(-50%) scaleX(1.3);
 }
 
-.power-icon {
-  line-height: 1;
-}
-
-.power-tooltip {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  right: 50%;
-  transform: translateX(50%);
-  background: rgba(0,0,0,0.92);
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-family: 'Inter', sans-serif;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-}
-
-.power-btn:hover .power-tooltip {
-  opacity: 1;
-}
-
-.power-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: rgba(0,0,0,0.92);
+.phone-power-btn:active {
+  background: #ff4444;
+  transform: translateY(-50%) scaleX(0.8);
 }
 
 /* Responsive */
-@media (max-width: 480px) {
-  .phone {
-    max-width: 320px;
+@media (max-width: 768px) {
+  .chalk-annotation {
+    left: calc(100% + 20px);
   }
-  .phone-bezel {
-    padding: 12px;
-    border-radius: 32px;
+  .chalk-text {
+    font-size: 18px;
   }
-  .phone-screen {
-    border-radius: 22px;
-  }
-  .phone-desktop {
-    padding: 32px 12px 16px;
-  }
-  .notch {
+  .chalk-arrow {
     width: 100px;
-    height: 22px;
-    top: 6px;
-  }
-  .app-icon-img {
-    width: 50px;
     height: 50px;
   }
+  .phone {
+    max-width: 440px;
+  }
+  .app-icon-img {
+    width: 72px;
+    height: 72px;
+  }
   .app-grid {
-    gap: 16px 24px;
-    padding: 12px 6px;
+    gap: 22px 36px;
   }
   .app-label {
-    font-size: 9px;
+    font-size: 13px;
+  }
+  .phone-power-btn {
+    height: 50px;
+    right: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone {
+    max-width: 380px;
+  }
+  .phone-bezel {
+    padding: 14px;
+    border-radius: 38px;
+  }
+  .phone-screen {
+    border-radius: 26px;
+  }
+  .phone-desktop {
+    padding: 38px 14px 18px;
+  }
+  .notch {
+    width: 110px;
+    height: 24px;
+    top: 8px;
+  }
+  .app-icon-img {
+    width: 64px;
+    height: 64px;
+  }
+  .app-grid {
+    gap: 18px 28px;
+    padding: 16px 8px;
+  }
+  .app-label {
+    font-size: 12px;
   }
   .status-bar {
-    font-size: 10px;
-    padding: 0 2px 12px 2px;
+    font-size: 12px;
+    padding: 0 2px 14px 2px;
   }
-  .power-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 17px;
-    bottom: 20px;
-    right: 20px;
+  .phone-power-btn {
+    height: 45px;
+    right: -7px;
+    width: 4px;
   }
-  .power-tooltip {
-    font-size: 10px;
-    padding: 6px 12px;
+  .chalk-annotation {
+    left: calc(100% + 12px);
+  }
+  .chalk-text {
+    font-size: 14px;
+  }
+  .chalk-arrow {
+    width: 80px;
+    height: 40px;
+  }
+  .home-indicator {
+    width: 100px;
   }
 }
 
 @media (max-width: 380px) {
   .phone {
-    max-width: 280px;
+    max-width: 320px;
   }
   .app-icon-img {
-    width: 42px;
-    height: 42px;
+    width: 54px;
+    height: 54px;
   }
   .app-grid {
-    gap: 12px 18px;
+    gap: 14px 22px;
   }
   .app-label {
-    font-size: 8px;
+    font-size: 10px;
+  }
+  .phone-power-btn {
+    height: 38px;
+    right: -5px;
+  }
+  .chalk-annotation {
+    left: calc(100% + 8px);
+  }
+  .chalk-text {
+    font-size: 12px;
+  }
+  .chalk-arrow {
+    width: 65px;
+    height: 32px;
+  }
+  .phone-bezel {
+    padding: 10px;
+    border-radius: 30px;
+  }
+  .phone-screen {
+    border-radius: 20px;
+  }
+  .notch {
+    width: 80px;
+    height: 20px;
+    top: 6px;
   }
 }

@@ -5,59 +5,84 @@
   <title>Jared Chiew — Socials</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="socials.css">
 </head>
 <body>
 
-  <main class="socials-wrap">
+  <!-- Phone Container -->
+  <div class="phone-container">
+    <div class="phone-wrapper">
+      <!-- Chalk Arrow & Text (Left side, pointing right toward power button) -->
+      <div class="chalk-annotation">
+        <span class="chalk-text">click here to go back</span>
+        <svg class="chalk-arrow" viewBox="0 0 120 80" fill="none">
+          <!-- Curved arrow pointing to the right -->
+          <path d="M110 40 L30 40 M50 20 L30 40 L50 60" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+          <!-- Small dotted guide line to the power button -->
+          <line x1="15" y1="40" x2="5" y2="40" stroke="#ffffff" stroke-width="2" stroke-dasharray="4 4" opacity="0.4"/>
+        </svg>
+      </div>
 
-    <!-- Title -->
-    <h1 class="terminal-title">
-      CONNECT WITH ME
-    </h1>
+      <div class="phone">
+        <!-- Phone Bezel -->
+        <div class="phone-bezel">
+          <!-- Notch -->
+          <div class="notch"></div>
+          <!-- Screen -->
+          <div class="phone-screen">
+            <div class="phone-desktop">
+              <!-- Status Bar -->
+              <div class="status-bar">
+                <span class="status-time">9:41</span>
+                <span class="status-icons">📶 🔋</span>
+              </div>
 
-    <!-- Links -->
-    <div class="terminal-list">
+              <!-- App Grid -->
+              <div class="app-grid">
+                <a href="https://www.linkedin.com/in/chiewthejared" target="_blank" class="app-item" data-app="linkedin">
+                  <img src="images/linkedin.png" alt="LinkedIn" class="app-icon-img" />
+                  <span class="app-label">LinkedIn</span>
+                </a>
 
-      <a href="https://www.linkedin.com/in/chiewthejared"
-         target="_blank"
-         class="terminal-link">
-        > linkedin
-      </a>
+                <a href="https://asu.joinhandshake.com/profiles/chiewthejared" target="_blank" class="app-item" data-app="handshake">
+                  <img src="images/handshake.png" alt="Handshake" class="app-icon-img" />
+                  <span class="app-label">Handshake</span>
+                </a>
 
-      <a href="https://asu.joinhandshake.com/profiles/chiewthejared"
-         target="_blank"
-         class="terminal-link">
-        > handshake
-      </a>
+                <a href="https://github.com/chiewthejared" target="_blank" class="app-item" data-app="github">
+                  <img src="images/github.png" alt="GitHub" class="app-icon-img" />
+                  <span class="app-label">GitHub</span>
+                </a>
 
-      <a href="https://github.com/chiewthejared"
-         target="_blank"
-         class="terminal-link">
-        > github
-      </a>
+                <a href="https://www.instagram.com/jared_hoodini" target="_blank" class="app-item" data-app="instagram">
+                  <img src="images/instagram.png" alt="Instagram" class="app-icon-img" />
+                  <span class="app-label">Instagram</span>
+                </a>
 
-      <a href="https://www.instagram.com/jared_hoodini"
-         target="_blank"
-         class="terminal-link">
-        > instagram
-      </a>
+                <a href="https://letterboxd.com/chiewthejared" target="_blank" class="app-item" data-app="letterboxd">
+                  <img src="images/letterboxd.png" alt="Letterboxd" class="app-icon-img" />
+                  <span class="app-label">Letterboxd</span>
+                </a>
 
-      <a href="https://letterboxd.com/chiewthejared"
-         target="_blank"
-         class="terminal-link">
-        > letterboxd
-      </a>
+                <a href="https://www.threads.com/@jared_hoodini" target="_blank" class="app-item" data-app="threads">
+                  <img src="images/threads.png" alt="Threads" class="app-icon-img" />
+                  <span class="app-label">Threads</span>
+                </a>
+              </div>
 
-      <span class="caret"></span>
+              <!-- Home Indicator -->
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Physical Power Button (right side) -->
+        <button class="phone-power-btn" id="powerBtn"></button>
+      </div>
     </div>
-  </main>
-
-  <button id="continueBtn" class="continue-btn">
-    CONTINUE ›
-  </button>
+  </div>
 
   <script src="socials.js"></script>
 </body>
